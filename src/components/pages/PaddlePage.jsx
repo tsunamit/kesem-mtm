@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import FirebaseContext from '../../firebase/context';
-import PaddleActivityContainer from '../../containers/PaddleActivityContainer';
+import FirebaseContext from '../firebase/context';
+import PaddleActivityContainer from '../containers/PaddleActivityContainer';
 
 function PaddlePage() {
 

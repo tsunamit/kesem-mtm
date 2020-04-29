@@ -2,8 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Navigation from '../navigation';
-import LandingPage from '../pages/landing/landing';
-import PaddlePage from '../pages/paddle/paddle';
+import LandingPage from '../pages/LandingPage';
+import PaddlePage from '../pages/PaddlePage';
+import JoinPaddlePage from '../pages/JoinPaddlePage';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -15,7 +16,7 @@ const App = () => (
       <hr />
 
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
-      <Route path={ROUTES.PADDLE} component={PaddlePage} />
+      <Route path={ROUTES.JOIN_PADDLE} component={JoinPaddlePage} />
     </div>
   </Router>
 );

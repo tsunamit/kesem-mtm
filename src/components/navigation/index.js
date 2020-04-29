@@ -10,7 +10,7 @@ const Navigation = () => (
         <Link to={ROUTES.LANDING}>Landing</Link>
       </li>
       <li>
-        <Link to={ROUTES.PADDLE}>Paddle Raise</Link>
+        <Link to={ROUTES.JOIN_PADDLE}>Paddle Raise</Link>
       </li>
     </ul>
   </div>

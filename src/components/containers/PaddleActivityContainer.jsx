@@ -10,27 +10,27 @@ function PaddleActivityContainer({ firebase, sessionId }) {
       sessionId,
       (querySnapshot) => {
         setSessionPaddles(querySnapshot.docs.map((doc) => doc.data()));
-      }
+      },
     );
-  }
+  };
 
   const addPaddle = () => {
     console.log('adding paddle');
     firebase.addPaddle('newfuncwhodis', 'new@new.com', 20, 'test')
-    .then(() => {
-      console.log('done adding paddle');
-    })
+      .then(() => {
+        console.log('done adding paddle');
+      });
   }
 
   // Run at beginning. Returns the destructor function
   useEffect(() => {
-    subscribeToPaddles();     
+    subscribeToPaddles();
     return (() => unsubscribePaddles());
   }, []);
 
   useEffect(() => {
     console.log(sessionPaddles);
-  }, [sessionPaddles])
+  }, [sessionPaddles]);
 
   return (
     <div>
@@ -40,7 +40,7 @@ function PaddleActivityContainer({ firebase, sessionId }) {
           Name: {paddle.name}, Email: {paddle.email}, Pledge: ${paddle.amountPledged} 
         </p>
       ))}
-      <button onClick={async () => await addPaddle()}>
+      <button onClick={async () => addPaddle()}>
         <p>Add Paddle</p>
       </button>
     </div>
