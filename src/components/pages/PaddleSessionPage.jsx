@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import FirebaseContext from '../firebase/context';
 import PaddleActivityContainer from '../containers/PaddleActivityContainer';
 
-function PaddlePage() {
+function PaddleSessionPage() {
 
   return (
     <div>
@@ -15,4 +15,4 @@ function PaddlePage() {
   );
 }
 
-export default PaddlePage;
+export default PaddleSessionPage;

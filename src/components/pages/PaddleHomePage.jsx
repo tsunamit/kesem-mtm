@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import CardContainer from '../containers/CardContainer';
 import OutlineTextBox from '../input/OutlineTextBox';
+import RoundedButton from '../input/RoundedButton';
+
+import * as ROUTES from '../../constants/routes';
 
 // TODO: move these strings to separate file
 const JOIN_PADDLE_RAISE_TITLE = 'Join our paddle raise!';
@@ -9,11 +13,20 @@ const JOIN_DESCRIPTION = 'After this event we will contact your email and direct
 const JOIN_NAME_PLACEHOLDER = 'Full Name';
 const JOIN_EMAIL_PLACEHOLDER = 'Email Address';
 const JOIN_SCREEN_NAME_PLACEHOLDER = 'Screen Name (Optional)';
+const JOIN_SESSION_ID_PLACEHOLDER = 'Session ID';
 
-function JoinPaddlePage() {
+function PaddleHomePage() {
+  const history = useHistory();
+
   const [paddleRaiseName, setPaddleRaiseName] = useState('');
   const [paddleRaiseEmail, setPaddleRaiseEmail] = useState('');
   const [paddleRaiseScreenName, setPaddleRaiseScreenName] = useState('');
+  const [paddleRaiseSessionId, setPaddleRaiseSessionId] = useState('');
+
+  const onClickJoin = () => {
+    console.log('TODO check form');
+    history.push(ROUTES.PADDLE_SESSION);
+  };
 
   return (
     <div>
@@ -41,10 +54,16 @@ function JoinPaddlePage() {
             placeholder={JOIN_SCREEN_NAME_PLACEHOLDER}
             onChangeText={(text) => setPaddleRaiseScreenName(text)}
           />
+          <OutlineTextBox
+            value={paddleRaiseSessionId}
+            placeholder={JOIN_SESSION_ID_PLACEHOLDER}
+            onChangeText={(text) => setPaddleRaiseSessionId(text)}
+          />
+          <RoundedButton onClick={() => onClickJoin()} />
         </CardContainer>
       </div>
     </div>
   );
 }
 
-export default JoinPaddlePage;
+export default PaddleHomePage;

@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Navigation from '../navigation';
 import LandingPage from '../pages/LandingPage';
-import JoinPaddlePage from '../pages/JoinPaddlePage';
+import PaddleHomePage from '../pages/PaddleHomePage';
+import PaddleSessionPage from '../pages/PaddleSessionPage';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -16,7 +17,8 @@ const App = () => (
       <hr />
 
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
-      <Route path={ROUTES.JOIN_PADDLE} component={JoinPaddlePage} />
+      <Route path={ROUTES.PADDLE_HOME} component={PaddleHomePage} />
+      <Route path={ROUTES.PADDLE_SESSION} component={PaddleSessionPage} />
     </div>
   </Router>
 );

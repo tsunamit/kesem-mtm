@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 function PaddleActivityContainer({ firebase, sessionId }) {
+  // TODO properly handle unsubscribe paddles
   let unsubscribePaddles; // call later in destructor to clean up subscription to paddle feed
 
   const [sessionPaddles, setSessionPaddles] = useState([]);
