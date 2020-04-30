@@ -12,7 +12,7 @@ function PaddlePage() {
         {(firebase) => <PaddleActivityContainer firebase={firebase} sessionId="test" />}
       </FirebaseContext.Consumer>
     </div>
-  )
+  );
 }
 
 export default PaddlePage;
