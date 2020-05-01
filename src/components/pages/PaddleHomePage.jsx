@@ -33,6 +33,7 @@ function PaddleHomePage() {
         name: paddleRaiseName,
         email: paddleRaiseEmail,
         screenName: paddleRaiseScreenName,
+        // TODO remove session id as a param and move it to the URL
         sessionId: paddleRaiseSessionId,
       },
     });

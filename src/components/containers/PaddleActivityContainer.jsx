@@ -19,14 +19,6 @@ function PaddleActivityContainer({ firebase, sessionId, user }) {
     );
   };
 
-  const addPaddle = () => {
-    console.log('adding paddle');
-    firebase.addPaddle(user.name, user.email, 20, sessionId)
-      .then(() => {
-        console.log('done adding paddle');
-      });
-  }
-
   // Run at beginning. Returns the destructor function
   useEffect(() => {
     subscribeToPaddles();
@@ -45,9 +37,7 @@ function PaddleActivityContainer({ firebase, sessionId, user }) {
           Name: {paddle.name}, Email: {paddle.email}, Pledge: ${paddle.amountPledged} 
         </p>
       ))}
-      <button type="button" onClick={async () => addPaddle()}>
-        <p>Add Paddle</p>
-      </button>
+      <hr />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import FirebaseContext from '../firebase/context';
 import PaddleActivityContainer from '../containers/PaddleActivityContainer';
+import PaddlePledgeContainer from '../containers/PaddlePledgeContainer';
 
 function PaddleSessionPage() {
   // use router history to access passes state
@@ -22,6 +23,7 @@ function PaddleSessionPage() {
       email: routerState.email,
       screenName: routerState.screenName,
     });
+    // TODO get session ID from the URL
     setSessionId(routerState.sessionId);
   }, []);
 
@@ -33,11 +35,20 @@ function PaddleSessionPage() {
           ? (
             <FirebaseContext.Consumer>
               {(firebase) => (
-                <PaddleActivityContainer
-                  firebase={firebase}
-                  sessionId={sessionId}
-                  user={user}
-                />
+                <div>
+                  <PaddleActivityContainer
+                    firebase={firebase}
+                    sessionId={sessionId}
+                    user={user}
+                  />
+                  <PaddlePledgeContainer
+                    firebase={firebase}
+                    sessionId={sessionId}
+                    user={user}
+                    // TODO fetch this number from the server
+                    currentPledgeAmount={20}
+                  />
+                </div>
               )}
             </FirebaseContext.Consumer>
           )
