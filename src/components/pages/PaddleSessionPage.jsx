@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import PaddleActivityContainer from '../containers/PaddleActivityContainer';
 import PaddlePledgeContainer from '../containers/PaddlePledgeContainer';
 import PaddlePledgeIndicator from '../containers/PaddlePledgeIndicator';
+import DonationProgressBar from '../containers/DonationProgressBar';
 
 
 function PaddleSessionPage({ firebase, location }) {
@@ -22,7 +23,7 @@ function PaddleSessionPage({ firebase, location }) {
   const [sessionIsValid, setSessionIsValid] = useState(false);
   const [sessionData, setSessionData] = useState({
     currentPledgeAmount: 0,
-    totalDonations: 0,
+    donationTotal: 0,
     donationGoal: 0,
     totalPaddlesRaised: 0,
     pledgeAmountSelections: [],
@@ -39,7 +40,7 @@ function PaddleSessionPage({ firebase, location }) {
 
     setSessionData({
       currentPledgeAmount: sessionDocSnapshot.data().currentPledgeAmount,
-      totalDonations: sessionDocSnapshot.data().totalDonations,
+      donationTotal: sessionDocSnapshot.data().donationTotal,
       donationGoal: sessionDocSnapshot.data().donationGoal,
       pledgeAmountSelections: sessionDocSnapshot.data().pledgeAmountSelections,
     });
@@ -91,6 +92,10 @@ function PaddleSessionPage({ firebase, location }) {
         sessionIsValid
           ? (
             <div>
+              <DonationProgressBar
+                currentDonationTotal={sessionData.donationTotal}
+                donationGoal={sessionData.donationGoal}
+              />
               <h1>[Picture]</h1>
               <h1>Big Hill Sponsor</h1>
               <h2>Provide Supplies For Virtual Camp</h2>

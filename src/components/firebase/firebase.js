@@ -2,6 +2,8 @@ import app from 'firebase/app';
 import 'firebase/firestore';
 import firebase from 'firebase';
 
+import { sessionData as sessionDataObjectModel } from '../../constants/model';
+
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -21,9 +23,15 @@ class Firebase {
   }
 
   // Firestore API
+  /**
+   * Get a reference to the session document
+   */
+  sessionDocReference = (sessionId) => (
+    this.firestore.doc(`sessions/${sessionId}`)
+  );
 
   /**
-   * Gets a reference to the session document (live snapshot)
+   * Gets a subscription to the session document (live snapshot)
    */
   subscribeToSession = (sessionId, onSessionUpdate) => {
     console.log('getting session:', sessionId);
@@ -52,8 +60,10 @@ class Firebase {
    * Add 
    */
   addPaddle = async (name, screenName, email, amountPledged, sessionId) => {
+    // generate a timestamp
     let createdAt = firebase.firestore.FieldValue.serverTimestamp();
 
+    // add paddle to the list of paddles raised
     this.paddlesCollection(sessionId).add({
       name,
       screenName,
@@ -62,7 +72,11 @@ class Firebase {
       createdAt,
     });
 
-    // TODO increment the session pledge amount
+    // increment the donation total
+    const atomicIncrement = firebase.firestore.FieldValue.increment(amountPledged);
+    this.sessionDocReference(sessionId).update({
+      [sessionDataObjectModel.donationTotal]: atomicIncrement
+    });
   }
 
   /**
