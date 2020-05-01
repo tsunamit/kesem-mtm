@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 
 import PaddleActivityContainer from '../containers/PaddleActivityContainer';
 import PaddlePledgeContainer from '../containers/PaddlePledgeContainer';
+import PaddlePledgeIndicator from '../containers/PaddlePledgeIndicator';
+
 
 function PaddleSessionPage({ firebase, location }) {
   // use router history to access passes state
@@ -20,9 +22,10 @@ function PaddleSessionPage({ firebase, location }) {
   const [sessionIsValid, setSessionIsValid] = useState(false);
   const [sessionData, setSessionData] = useState({
     currentPledgeAmount: 0,
-    currentDonationAmount: 0,
+    totalDonations: 0,
     donationGoal: 0,
     totalPaddlesRaised: 0,
+    pledgeAmountSelections: [],
   });
 
   const onSessionUpdate = (sessionDocSnapshot) => {
@@ -35,9 +38,10 @@ function PaddleSessionPage({ firebase, location }) {
 
     setSessionData({
       currentPledgeAmount: sessionDocSnapshot.data().currentPledgeAmount,
-      currentDonationAmount: sessionDocSnapshot.data().currentDonationAmount,
+      totalDonations: sessionDocSnapshot.data().totalDonations,
       donationGoal: sessionDocSnapshot.data().donationGoal,
       totalPaddlesRaised: sessionDocSnapshot.data().totalPaddlesRaised,
+      pledgeAmountSelections: sessionDocSnapshot.data().pledgeAmountSelections,
     });
   };
 
@@ -69,14 +73,17 @@ function PaddleSessionPage({ firebase, location }) {
         sessionIsValid
           ? (
             <div>
+              <PaddlePledgeIndicator
+                pledgeAmounts={sessionData.pledgeAmountSelections}
+                currentPledgeAmount={sessionData.currentPledgeAmount}
+              />
+              <br />
               <PaddleActivityContainer
                 firebase={firebase}
                 sessionId={sessionId}
                 user={user}
               />
-
               <br />
-
               <PaddlePledgeContainer
                 firebase={firebase}
                 sessionId={sessionId}
@@ -86,7 +93,7 @@ function PaddleSessionPage({ firebase, location }) {
             </div>
           ) : (
             <p>Session invalid</p>
-          ) 
+          )
       }
     </div>
   );
