@@ -21,7 +21,13 @@ class Firebase {
   }
 
   // Firestore API
-  paddlesCollection = (sessionId) => this.firestore.collection(`sessions/${sessionId}/paddles`);
+  paddlesCollection = (sessionId) => (
+    this.firestore.collection(`sessions/${sessionId}/paddles`)
+  );
+
+  orderedPaddlesCollection = (sessionId) => (
+    this.firestore.collection(`sessions/${sessionId}/paddles`).orderBy('createdAt')
+  );
 
   addPaddle = async (name, email, amountPledged, sessionId) => {
     let createdAt = firebase.firestore.FieldValue.serverTimestamp();
@@ -35,7 +41,7 @@ class Firebase {
   }
 
   subscribeToPaddles = async (sessionId, onUpdate) => {
-    return this.paddlesCollection(sessionId).onSnapshot(querySnapshot => onUpdate(querySnapshot));
+    return this.orderedPaddlesCollection(sessionId).onSnapshot(querySnapshot => onUpdate(querySnapshot));
   }
 }
 

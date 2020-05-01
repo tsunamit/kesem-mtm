@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-function PaddleActivityContainer({ firebase, sessionId }) {
+import PropTypes from 'prop-types';
+
+function PaddleActivityContainer({ firebase, sessionId, user }) {
   // TODO properly handle unsubscribe paddles
   let unsubscribePaddles; // call later in destructor to clean up subscription to paddle feed
+  console.log('sessionId: ', sessionId);
+  console.log('user', user);
 
   const [sessionPaddles, setSessionPaddles] = useState([]);
 
@@ -17,7 +21,7 @@ function PaddleActivityContainer({ firebase, sessionId }) {
 
   const addPaddle = () => {
     console.log('adding paddle');
-    firebase.addPaddle('newfuncwhodis', 'new@new.com', 20, 'test')
+    firebase.addPaddle(user.name, user.email, 20, sessionId)
       .then(() => {
         console.log('done adding paddle');
       });
@@ -41,11 +45,20 @@ function PaddleActivityContainer({ firebase, sessionId }) {
           Name: {paddle.name}, Email: {paddle.email}, Pledge: ${paddle.amountPledged} 
         </p>
       ))}
-      <button onClick={async () => addPaddle()}>
+      <button type="button" onClick={async () => addPaddle()}>
         <p>Add Paddle</p>
       </button>
     </div>
   );
 }
+
+PaddleActivityContainer.propTypes = {
+  sessionId: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    screenName: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default PaddleActivityContainer;

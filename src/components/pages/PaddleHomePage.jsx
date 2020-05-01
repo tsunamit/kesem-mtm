@@ -13,10 +13,12 @@ const JOIN_DESCRIPTION = 'After this event we will contact your email and direct
 const JOIN_NAME_PLACEHOLDER = 'Full Name';
 const JOIN_EMAIL_PLACEHOLDER = 'Email Address';
 const JOIN_SCREEN_NAME_PLACEHOLDER = 'Screen Name (Optional)';
+const SCREEN_NAME_DESCRIPTION = 'Your screen name will be visible to the lobby when you raise your paddle. If left blank, we will assign you a paddle number.';
 const JOIN_SESSION_ID_PLACEHOLDER = 'Session ID';
+const ENTER_PADDLE_RAISE_BTN_TEXT = 'Enter Paddle Raise';
 
 function PaddleHomePage() {
-  const history = useHistory();
+  const routerHistory = useHistory();
 
   const [paddleRaiseName, setPaddleRaiseName] = useState('');
   const [paddleRaiseEmail, setPaddleRaiseEmail] = useState('');
@@ -25,7 +27,15 @@ function PaddleHomePage() {
 
   const onClickJoin = () => {
     console.log('TODO check form');
-    history.push(ROUTES.PADDLE_SESSION);
+    routerHistory.push({
+      pathname: ROUTES.PADDLE_SESSION,
+      state: {
+        name: paddleRaiseName,
+        email: paddleRaiseEmail,
+        screenName: paddleRaiseScreenName,
+        sessionId: paddleRaiseSessionId,
+      },
+    });
   };
 
   return (
@@ -59,7 +69,8 @@ function PaddleHomePage() {
             placeholder={JOIN_SESSION_ID_PLACEHOLDER}
             onChangeText={(text) => setPaddleRaiseSessionId(text)}
           />
-          <RoundedButton onClick={() => onClickJoin()} />
+          <p>{SCREEN_NAME_DESCRIPTION}</p>
+          <RoundedButton title={ENTER_PADDLE_RAISE_BTN_TEXT} onClick={() => onClickJoin()} />
         </CardContainer>
       </div>
     </div>
