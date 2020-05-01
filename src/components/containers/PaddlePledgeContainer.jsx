@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -7,13 +7,7 @@ import RoundedButton from '../input/RoundedButton';
 
 function PaddlePledgeContainer({ firebase, user, currentPledgeAmount, sessionId }) {
   const onClickRaisePaddle = () => {
-    firebase.addPaddle(user.name, user.email, currentPledgeAmount, sessionId)
-      .then(() => {
-        console.log('done adding paddle');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    firebase.addPaddle(user.name, user.email, currentPledgeAmount, sessionId);
   };
 
   return (

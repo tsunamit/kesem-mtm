@@ -7,8 +7,6 @@ import CardContainer from './CardContainer';
 function PaddleActivityContainer({ firebase, sessionId, user }) {
   // TODO properly handle unsubscribe paddles
   let unsubscribePaddles; // call later in destructor to clean up subscription to paddle feed
-  console.log('sessionId: ', sessionId);
-  console.log('user', user);
 
   const [sessionPaddles, setSessionPaddles] = useState([]);
 
@@ -29,7 +27,6 @@ function PaddleActivityContainer({ firebase, sessionId, user }) {
   }, []);
 
   useEffect(() => {
-    console.log(sessionPaddles);
   }, [sessionPaddles]);
 
   return (

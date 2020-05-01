@@ -1,66 +1,101 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import queryString from 'query-string';
+import PropTypes from 'prop-types';
 
-import FirebaseContext from '../firebase/context';
 import PaddleActivityContainer from '../containers/PaddleActivityContainer';
 import PaddlePledgeContainer from '../containers/PaddlePledgeContainer';
 
-function PaddleSessionPage({ location }) {
+function PaddleSessionPage({ firebase, location }) {
   // use router history to access passes state
   const routerHistory = useHistory();
 
+  // component state
   const [user, setUser] = useState({
     name: '',
     email: '',
     screenName: '',
   });
   const [sessionId, setSessionId] = useState('');
+  const [sessionIsValid, setSessionIsValid] = useState(false);
+  const [sessionData, setSessionData] = useState({
+    currentPledgeAmount: 0,
+    currentDonationAmount: 0,
+    donationGoal: 0,
+    totalPaddlesRaised: 0,
+  });
 
+  const onSessionUpdate = (sessionDocSnapshot) => {
+    if (sessionDocSnapshot.exists) {
+      setSessionIsValid(true);
+    } else {
+      setSessionIsValid(false);
+      return;
+    }
+
+    setSessionData({
+      currentPledgeAmount: sessionDocSnapshot.data().currentPledgeAmount,
+      currentDonationAmount: sessionDocSnapshot.data().currentDonationAmount,
+      donationGoal: sessionDocSnapshot.data().donationGoal,
+      totalPaddlesRaised: sessionDocSnapshot.data().totalPaddlesRaised,
+    });
+  };
+
+  // on load
   useEffect(() => {
-    console.log('effect hit');
+    // get user parameters from passed state
     const routerState = routerHistory.location.state;
     setUser({
       name: routerState.name,
       email: routerState.email,
       screenName: routerState.screenName,
     });
+
+    // get session id from url
     const urlVars = queryString.parse(location.search);
     setSessionId(urlVars.sessionId);
+
+
+    firebase.subscribeToSession(
+      urlVars.sessionId,
+      (sessionDocSnapshot) => onSessionUpdate(sessionDocSnapshot),
+    );
   }, []);
 
   return (
     <div>
       <h1>Paddle Page</h1>
       {
-        sessionId !== ''
+        sessionIsValid
           ? (
-            <FirebaseContext.Consumer>
-              {(firebase) => (
-                <div>
-                  <PaddleActivityContainer
-                    firebase={firebase}
-                    sessionId={sessionId}
-                    user={user}
-                  />
+            <div>
+              <PaddleActivityContainer
+                firebase={firebase}
+                sessionId={sessionId}
+                user={user}
+              />
 
-                  <br />
+              <br />
 
-                  <PaddlePledgeContainer
-                    firebase={firebase}
-                    sessionId={sessionId}
-                    user={user}
-                    // TODO fetch this number from the server
-                    currentPledgeAmount={20}
-                  />
-                </div>
-              )}
-            </FirebaseContext.Consumer>
-          )
-          : null
+              <PaddlePledgeContainer
+                firebase={firebase}
+                sessionId={sessionId}
+                user={user}
+                currentPledgeAmount={sessionData.currentPledgeAmount}
+              />
+            </div>
+          ) : (
+            <p>Session invalid</p>
+          ) 
       }
     </div>
   );
 }
+
+PaddleSessionPage.propTypes = {
+  location: PropTypes.shape({
+    search: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default PaddleSessionPage;

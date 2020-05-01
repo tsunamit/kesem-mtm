@@ -21,14 +21,36 @@ class Firebase {
   }
 
   // Firestore API
+
+  /**
+   * Gets a reference to the session document (live snapshot)
+   */
+  subscribeToSession = (sessionId, onSessionUpdate) => {
+    console.log('getting session:', sessionId);
+    const sessionDocumentRef = this.firestore.doc(`sessions/${sessionId}`);
+    return sessionDocumentRef.onSnapshot((sessionDocumentSnapshot) => {
+      onSessionUpdate(sessionDocumentSnapshot);
+    });
+  }
+
+  /**
+   * Get a reference to the paddles collection for a particular session. Need
+   * this unordered version to be able to add new paddles
+   */
   paddlesCollection = (sessionId) => (
     this.firestore.collection(`sessions/${sessionId}/paddles`)
   );
 
+  /**
+   * Get paddles collection ordered list based on creation time
+   */
   orderedPaddlesCollection = (sessionId) => (
     this.firestore.collection(`sessions/${sessionId}/paddles`).orderBy('createdAt')
   );
 
+  /**
+   * Add 
+   */
   addPaddle = async (name, email, amountPledged, sessionId) => {
     let createdAt = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -38,8 +60,13 @@ class Firebase {
       amountPledged,
       createdAt,
     });
+
+    // TODO increment the session pledge amount
   }
 
+  /**
+   * 
+   */
   subscribeToPaddles = async (sessionId, onUpdate) => {
     return this.orderedPaddlesCollection(sessionId).onSnapshot(querySnapshot => onUpdate(querySnapshot));
   }
