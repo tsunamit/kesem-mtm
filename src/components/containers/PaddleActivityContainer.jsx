@@ -4,37 +4,20 @@ import PropTypes from 'prop-types';
 
 import CardContainer from './CardContainer';
 
-function PaddleActivityContainer({ firebase, sessionId, user }) {
-  // TODO properly handle unsubscribe paddles
-  let unsubscribePaddles; // call later in destructor to clean up subscription to paddle feed
+const paddleLogMessage = (screenName, amountPledged) => (
+  `${screenName} just raised for ${amountPledged}`
+);
 
-  const [sessionPaddles, setSessionPaddles] = useState([]);
-
-  const subscribeToPaddles = () => {
-    unsubscribePaddles = firebase.subscribeToPaddles(
-      sessionId,
-      (querySnapshot) => {
-        setSessionPaddles(querySnapshot.docs.map((doc) => doc.data()));
-      },
-    );
-  };
-
-  // Run at beginning. Returns the destructor function
-  useEffect(() => {
-    subscribeToPaddles();
-    // TODO unsubscribe
-    // return (() => unsubscribePaddles());
-  }, []);
-
-  useEffect(() => {
-  }, [sessionPaddles]);
+function PaddleActivityContainer({ sessionPaddles }) {
+  const totalPaddlesRaised = sessionPaddles.length;
 
   return (
     <CardContainer>
-      <h2>Paddles</h2>
+      <h2>{totalPaddlesRaised} paddles raised</h2>
+      <hr />
       {sessionPaddles.map((paddle) => (
-        <p>
-          Name: {paddle.name}, Email: {paddle.email}, Pledge: ${paddle.amountPledged} 
+        <p key={paddle.screenName + paddle.amountPledged.toString()}>
+          {paddleLogMessage(paddle.screenName, paddle.amountPledged)}
         </p>
       ))}
     </CardContainer>
@@ -42,7 +25,18 @@ function PaddleActivityContainer({ firebase, sessionId, user }) {
 }
 
 PaddleActivityContainer.propTypes = {
-  sessionId: PropTypes.string.isRequired,
+  sessionPaddles: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      screenName: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+      amountPledged: PropTypes.number.isRequired,
+      createdAt: PropTypes.shape({
+        nanoseconds: PropTypes.number.isRequired,
+        seconds: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+  ).isRequired,
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,

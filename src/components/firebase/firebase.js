@@ -51,11 +51,12 @@ class Firebase {
   /**
    * Add 
    */
-  addPaddle = async (name, email, amountPledged, sessionId) => {
+  addPaddle = async (name, screenName, email, amountPledged, sessionId) => {
     let createdAt = firebase.firestore.FieldValue.serverTimestamp();
 
     this.paddlesCollection(sessionId).add({
       name,
+      screenName,
       email,
       amountPledged,
       createdAt,

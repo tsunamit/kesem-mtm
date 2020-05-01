@@ -12,7 +12,7 @@ function PaddleSessionPage({ firebase, location }) {
   // use router history to access passes state
   const routerHistory = useHistory();
 
-  // component state
+  // state
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -27,6 +27,7 @@ function PaddleSessionPage({ firebase, location }) {
     totalPaddlesRaised: 0,
     pledgeAmountSelections: [],
   });
+  const [sessionPaddles, setSessionPaddles] = useState([]);
 
   const onSessionUpdate = (sessionDocSnapshot) => {
     if (sessionDocSnapshot.exists) {
@@ -40,10 +41,28 @@ function PaddleSessionPage({ firebase, location }) {
       currentPledgeAmount: sessionDocSnapshot.data().currentPledgeAmount,
       totalDonations: sessionDocSnapshot.data().totalDonations,
       donationGoal: sessionDocSnapshot.data().donationGoal,
-      totalPaddlesRaised: sessionDocSnapshot.data().totalPaddlesRaised,
       pledgeAmountSelections: sessionDocSnapshot.data().pledgeAmountSelections,
     });
   };
+
+  const subscribeToPaddles = () => {
+    // TODO set equal to unsubscribe function and call it in destructor
+    firebase.subscribeToPaddles(
+      sessionId,
+      (querySnapshot) => {
+        setSessionPaddles(querySnapshot.docs.map((doc) => doc.data()));
+      },
+    );
+  };
+
+  /**
+   * execute when session is validated
+   */
+  useEffect(() => {
+    if (sessionIsValid) {
+      subscribeToPaddles();
+    }
+  }, [sessionIsValid]);
 
   // on load
   useEffect(() => {
@@ -68,19 +87,20 @@ function PaddleSessionPage({ firebase, location }) {
 
   return (
     <div>
-      <h1>Paddle Page</h1>
       {
         sessionIsValid
           ? (
             <div>
+              <h1>[Picture]</h1>
+              <h1>Big Hill Sponsor</h1>
+              <h2>Provide Supplies For Virtual Camp</h2>
               <PaddlePledgeIndicator
                 pledgeAmounts={sessionData.pledgeAmountSelections}
                 currentPledgeAmount={sessionData.currentPledgeAmount}
               />
               <br />
               <PaddleActivityContainer
-                firebase={firebase}
-                sessionId={sessionId}
+                sessionPaddles={sessionPaddles}
                 user={user}
               />
               <br />

@@ -7,12 +7,12 @@ import RoundedButton from '../input/RoundedButton';
 
 function PaddlePledgeContainer({ firebase, user, currentPledgeAmount, sessionId }) {
   const onClickRaisePaddle = () => {
-    firebase.addPaddle(user.name, user.email, currentPledgeAmount, sessionId);
+    firebase.addPaddle(user.name, user.screenName, user.email, currentPledgeAmount, sessionId);
   };
 
   return (
     <CardContainer>
-      <p>You are {user.name}</p>
+      <p>You are {user.name}.</p>
       <h2>Pledge to give</h2>
       <h1>${currentPledgeAmount}</h1>
       <RoundedButton title="Raise my paddle!" onClick={() => onClickRaisePaddle()} />
