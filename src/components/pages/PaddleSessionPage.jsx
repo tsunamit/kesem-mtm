@@ -41,6 +41,9 @@ function PaddleSessionPage() {
                     sessionId={sessionId}
                     user={user}
                   />
+
+                  <br />
+
                   <PaddlePledgeContainer
                     firebase={firebase}
                     sessionId={sessionId}

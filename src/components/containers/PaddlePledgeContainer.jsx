@@ -2,6 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
+import CardContainer from './CardContainer';
 import RoundedButton from '../input/RoundedButton';
 
 function PaddlePledgeContainer({ firebase, user, currentPledgeAmount, sessionId }) {
@@ -16,12 +17,12 @@ function PaddlePledgeContainer({ firebase, user, currentPledgeAmount, sessionId 
   };
 
   return (
-    <div>
+    <CardContainer>
       <p>You are {user.name}</p>
       <h2>Pledge to give</h2>
       <h1>${currentPledgeAmount}</h1>
       <RoundedButton title="Raise my paddle!" onClick={() => onClickRaisePaddle()} />
-    </div>
+    </CardContainer>
   );
 }
 

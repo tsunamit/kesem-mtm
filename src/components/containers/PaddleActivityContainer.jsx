@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
+import CardContainer from './CardContainer';
+
 function PaddleActivityContainer({ firebase, sessionId, user }) {
   // TODO properly handle unsubscribe paddles
   let unsubscribePaddles; // call later in destructor to clean up subscription to paddle feed
@@ -30,15 +32,14 @@ function PaddleActivityContainer({ firebase, sessionId, user }) {
   }, [sessionPaddles]);
 
   return (
-    <div>
+    <CardContainer>
       <h2>Paddles</h2>
       {sessionPaddles.map((paddle) => (
         <p>
           Name: {paddle.name}, Email: {paddle.email}, Pledge: ${paddle.amountPledged} 
         </p>
       ))}
-      <hr />
-    </div>
+    </CardContainer>
   );
 }
 
