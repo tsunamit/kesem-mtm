@@ -28,13 +28,13 @@ function PaddleHomePage() {
   const onClickJoin = () => {
     console.log('TODO check form');
     routerHistory.push({
+      // pathname: ROUTES.PADDLE_SESSION,
       pathname: ROUTES.PADDLE_SESSION,
+      search: `?sessionId=${paddleRaiseSessionId}`,
       state: {
         name: paddleRaiseName,
         email: paddleRaiseEmail,
         screenName: paddleRaiseScreenName,
-        // TODO remove session id as a param and move it to the URL
-        sessionId: paddleRaiseSessionId,
       },
     });
   };

@@ -24,7 +24,8 @@ function PaddleActivityContainer({ firebase, sessionId, user }) {
   // Run at beginning. Returns the destructor function
   useEffect(() => {
     subscribeToPaddles();
-    return (() => unsubscribePaddles());
+    // TODO unsubscribe
+    // return (() => unsubscribePaddles());
   }, []);
 
   useEffect(() => {
