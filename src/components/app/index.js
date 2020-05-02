@@ -1,10 +1,13 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+import FirebaseContext from '../firebase/context';
+
 import Navigation from '../navigation';
 import LandingPage from '../pages/LandingPage';
-import PaddlePage from '../pages/PaddlePage';
-import JoinPaddlePage from '../pages/JoinPaddlePage';
+import PaddleHomePage from '../pages/PaddleHomePage';
+import PaddleSessionPage from '../pages/PaddleSessionPage';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -16,7 +19,18 @@ const App = () => (
       <hr />
 
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
-      <Route path={ROUTES.JOIN_PADDLE} component={JoinPaddlePage} />
+      <Route path={ROUTES.PADDLE_HOME} component={PaddleHomePage} />
+      <Route
+        path={ROUTES.PADDLE_SESSION}
+        render={(props) => (
+          <FirebaseContext.Consumer>
+            {(firebase) => (
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              <PaddleSessionPage {...props} firebase={firebase} />
+            )}
+          </FirebaseContext.Consumer>
+        )}
+      />
     </div>
   </Router>
 );

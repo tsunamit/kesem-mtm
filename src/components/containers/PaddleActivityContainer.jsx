@@ -1,50 +1,47 @@
 import React, { useState, useEffect } from 'react';
 
-function PaddleActivityContainer({ firebase, sessionId }) {
-  let unsubscribePaddles; // call later in destructor to clean up subscription to paddle feed
+import PropTypes from 'prop-types';
 
-  const [sessionPaddles, setSessionPaddles] = useState([]);
+import CardContainer from './CardContainer';
 
-  const subscribeToPaddles = () => {
-    unsubscribePaddles = firebase.subscribeToPaddles(
-      sessionId,
-      (querySnapshot) => {
-        setSessionPaddles(querySnapshot.docs.map((doc) => doc.data()));
-      },
-    );
-  };
+const paddleLogMessage = (screenName, amountPledged) => (
+  `${screenName} just raised for ${amountPledged}`
+);
 
-  const addPaddle = () => {
-    console.log('adding paddle');
-    firebase.addPaddle('newfuncwhodis', 'new@new.com', 20, 'test')
-      .then(() => {
-        console.log('done adding paddle');
-      });
-  }
-
-  // Run at beginning. Returns the destructor function
-  useEffect(() => {
-    subscribeToPaddles();
-    return (() => unsubscribePaddles());
-  }, []);
-
-  useEffect(() => {
-    console.log(sessionPaddles);
-  }, [sessionPaddles]);
+function PaddleActivityContainer({ sessionPaddles }) {
+  const totalPaddlesRaised = sessionPaddles.length;
 
   return (
-    <div>
-      <h2>Paddles</h2>
+    <CardContainer>
+      <h2>{totalPaddlesRaised} paddles raised</h2>
+      <hr />
       {sessionPaddles.map((paddle) => (
-        <p>
-          Name: {paddle.name}, Email: {paddle.email}, Pledge: ${paddle.amountPledged} 
+        <p key={paddle.screenName + paddle.amountPledged.toString()}>
+          {paddleLogMessage(paddle.screenName, paddle.amountPledged)}
         </p>
       ))}
-      <button onClick={async () => addPaddle()}>
-        <p>Add Paddle</p>
-      </button>
-    </div>
+    </CardContainer>
   );
 }
+
+PaddleActivityContainer.propTypes = {
+  sessionPaddles: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      screenName: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+      amountPledged: PropTypes.number.isRequired,
+      createdAt: PropTypes.shape({
+        nanoseconds: PropTypes.number.isRequired,
+        seconds: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+  ).isRequired,
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    screenName: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default PaddleActivityContainer;
