@@ -24,13 +24,14 @@ nvm install --lts
 
 ### Get repo up and running
 1. Clone repository
-2. Branch off of the `dev` branch
-3. Add the keys file `.env` to the root directory of your project
-4. Add all necessary packages for the project by running the following command. You can see which packages it will install via the package.json file
+2. Checkout the `dev` branch
+3. Branch off of the `dev` branch
+4. Add the keys file `.env` to the root directory of your project
+5. Add all necessary packages for the project by running the following command. You can see which packages it will install via the package.json file
 ```
 npm install
 ```
-5. Run the website with
+6. Run the website with
 ```
 npm start
 ```
