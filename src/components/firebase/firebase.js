@@ -2,6 +2,8 @@ import app from 'firebase/app';
 import 'firebase/firestore';
 import firebase from 'firebase';
 
+import { sessionData as sessionDataObjectModel } from '../../constants/model';
+
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -21,21 +23,67 @@ class Firebase {
   }
 
   // Firestore API
-  paddlesCollection = (sessionId) => this.firestore.collection(`sessions/${sessionId}/paddles`);
+  /**
+   * Get a reference to the session document
+   */
+  sessionDocReference = (sessionId) => (
+    this.firestore.doc(`sessions/${sessionId}`)
+  );
 
-  addPaddle = async (name, email, amountPledged, sessionId) => {
+  /**
+   * Gets a subscription to the session document (live snapshot)
+   */
+  subscribeToSession = (sessionId, onSessionUpdate) => {
+    console.log('getting session:', sessionId);
+    const sessionDocumentRef = this.firestore.doc(`sessions/${sessionId}`);
+    return sessionDocumentRef.onSnapshot((sessionDocumentSnapshot) => {
+      onSessionUpdate(sessionDocumentSnapshot);
+    });
+  }
+
+  /**
+   * Get a reference to the paddles collection for a particular session. Need
+   * this unordered version to be able to add new paddles
+   */
+  paddlesCollection = (sessionId) => (
+    this.firestore.collection(`sessions/${sessionId}/paddles`)
+  );
+
+  /**
+   * Get paddles collection ordered list based on creation time
+   */
+  orderedPaddlesCollection = (sessionId) => (
+    this.firestore.collection(`sessions/${sessionId}/paddles`).orderBy('createdAt')
+  );
+
+  /**
+   * Add 
+   */
+  addPaddle = async (name, screenName, email, amountPledged, sessionId) => {
+    // generate a timestamp
     let createdAt = firebase.firestore.FieldValue.serverTimestamp();
 
+    // add paddle to the list of paddles raised
     this.paddlesCollection(sessionId).add({
       name,
+      screenName,
       email,
       amountPledged,
       createdAt,
     });
+
+    // increment the donation total
+    const atomicIncrement = firebase.firestore.FieldValue.increment(amountPledged);
+    this.sessionDocReference(sessionId).update({
+      [sessionDataObjectModel.donationTotal]: atomicIncrement
+    });
   }
 
+  /**
+   * 
+   */
   subscribeToPaddles = async (sessionId, onUpdate) => {
-    return this.paddlesCollection(sessionId).onSnapshot(querySnapshot => onUpdate(querySnapshot));
+    return this.orderedPaddlesCollection(sessionId).onSnapshot(querySnapshot => onUpdate(querySnapshot));
   }
 }
 

@@ -1,0 +1,12 @@
+body {
+  /* display: flex; */
+}
+
+#card-container {
+  background-color: white;
+  height: auto;
+  width: auto;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px lightgrey;
+}
