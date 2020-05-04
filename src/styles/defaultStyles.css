@@ -1,25 +1,32 @@
 @font-face {
     font-family: 'Gilroy-Regular';
-    src: local('Gilroy-Regular'), url(./fonts/Gilroy-Regular.tff) format('truetype')
+    src: local('Gilroy-Regular'), url(../fonts/Gilroy-Regular.ttf) format('truetype')
 }
 
 @font-face {
     font-family: 'Gilroy-Bold';
-    src: local('Gilroy-Bold'), url(./fonts/Gilroy-Bold.tff) format('truetype')
+    src: local('Gilroy-Bold'), url(../fonts/Gilroy-Bold.ttf) format('truetype')
 }
 
 @font-face {
     font-family: 'Gilroy-Heavy';
-    src: local('Gilroy-Heavy'), url(./fonts/Gilroy-Heavy.tff) format('truetype')
+    src: local('Gilroy-Heavy'), url(../fonts/Gilroy-Heavy.ttf) format('truetype')
 }
 
 @font-face {
     font-family: 'Gilroy-Medium';
-    src: local('Gilroy-Medium'), url(./fonts/Gilroy-Medium.tff) format('truetype')
+    src: local('Gilroy-Medium'), url(../fonts/Gilroy-Medium.ttf) format('truetype')
 }
 
 @font-face {
     font-family: 'Gilroy-Light';
-    src: local('Gilroy-LIght'), url(./fonts/Gilroy-Light.tff) format('truetype')
+    src: local('Gilroy-LIght'), url(../fonts/Gilroy-Light.ttf) format('truetype')
 }
 
+.container {
+    display: flex;
+}
+
+.page-h1 {
+    font-family: Gilroy-Bold;
+}
