@@ -1,4 +1,3 @@
-Taylor edited this. 
 # Kesem Make the Magic webpage
 
 
