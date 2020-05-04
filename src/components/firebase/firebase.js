@@ -2,7 +2,7 @@ import app from 'firebase/app';
 import 'firebase/firestore';
 import firebase from 'firebase';
 
-import { sessionData as sessionDataObjectModel } from '../../constants/model';
+import { sessionData as sessionDataModel, AUCTION } from '../../constants/model';
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -75,7 +75,7 @@ class Firebase {
     // increment the donation total
     const atomicIncrement = firebase.firestore.FieldValue.increment(amountPledged);
     this.sessionDocReference(sessionId).update({
-      [sessionDataObjectModel.donationTotal]: atomicIncrement
+      [sessionDataModel.donationTotal]: atomicIncrement
     });
   }
 
@@ -85,6 +85,19 @@ class Firebase {
   subscribeToPaddles = async (sessionId, onUpdate) => {
     return this.orderedPaddlesCollection(sessionId).onSnapshot(querySnapshot => onUpdate(querySnapshot));
   }
+
+  /**
+   * Gets auction items from the auction collection
+   */
+  getAuctionItems = async () => {
+    return this.firestore.collection('auction').orderBy(AUCTION.auctionOrder).get()
+      .then((auctionCollection) => {
+        const auctionCollectionDocData = auctionCollection.docs.map((auctionItem) => (
+          auctionItem.data()
+        ));
+        return auctionCollectionDocData;
+      })
+  };
 }
 
 export default Firebase;
