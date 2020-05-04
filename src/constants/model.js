@@ -12,3 +12,11 @@ export const paddle = {
   amountPledged: 'amountPledged',
   createdAt: 'createdAt',
 };
+
+export const AUCTION = {
+  title: 'title',
+  description: 'description',
+  itemOwner: 'itemOwner',
+  link: 'link',
+  auctionOrder: 'auctionOrder',
+};

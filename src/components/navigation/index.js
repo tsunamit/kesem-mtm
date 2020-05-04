@@ -12,6 +12,9 @@ const Navigation = () => (
       <li>
         <Link to={ROUTES.PADDLE_HOME}>Paddle Raise</Link>
       </li>
+      <li>
+        <Link to={ROUTES.AUCTION}>Auction</Link>
+      </li>
     </ul>
   </div>
 );
