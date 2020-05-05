@@ -16,6 +16,11 @@
     text-align: center;
 }
 
+#navigation-button:last-child{
+    font-family: Gilroy-Bold;
+    color: #0091BA; 
+}
+
 #navigation-button:hover {
     font-family: Gilroy-Medium;
 }
@@ -23,7 +28,6 @@
 #navigation-gap {
     flex: 3; 
 }
-
 
 #ck-logo {
     flex: 1;
