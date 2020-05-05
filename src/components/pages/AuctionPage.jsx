@@ -5,6 +5,9 @@ import AuctionItemContainer from '../containers/AuctionItemContainer';
 
 import { AUCTION } from '../../constants/model';
 
+import '../../styles/defaultStyles.css';
+import './styles/AuctionPageStyles.css';
+
 const TITLE = 'Silent Auction';
 const DESCRIPTION = 'All proceeds support our campers! To participate please see our auction rules and agreement';
 const AUCTION_DATES = 'Auction is open from May 5th - May 13th';
@@ -35,16 +38,18 @@ function AuctionPage({ firebase }) {
   }, []);
 
   return (
-    <div>
-      {/* Headers */}
-      <h1>{TITLE}</h1>
-      <br />
-      <p>{DESCRIPTION}</p>
-      <br />
-      <p>{AUCTION_DATES}</p>
+    <div className="page-container">
+      <div className="container">
+        {/* Headers */}
+        <h1 className="page-h1">{TITLE}</h1>
+        <p className="page-p">{DESCRIPTION}</p>
+        <p className="page-p bold">{AUCTION_DATES}</p>
 
-      {/* Auction items */}
-      {mapAuctionItemDataToContainers(auctionItems)}
+        {/* Auction items */}
+        <div className="card-grid-container">
+          {mapAuctionItemDataToContainers(auctionItems)}
+        </div>
+      </div>
     </div>
   );
 }
