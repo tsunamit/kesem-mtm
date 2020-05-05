@@ -17,7 +17,6 @@ const App = () => (
     <div>
       <Navigation />
 
-      <hr />
 
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.PADDLE_HOME} component={PaddleHomePage} />
