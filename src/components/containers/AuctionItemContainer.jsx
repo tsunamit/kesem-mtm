@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CardContainer from './CardContainer';
 import RoundedButton from '../input/RoundedButton';
 
 import './styles/AuctionItemContainerStyles.css';
