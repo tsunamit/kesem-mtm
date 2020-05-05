@@ -23,12 +23,17 @@
     src: local('Gilroy-LIght'), url(../fonts/Gilroy-Light.ttf) format('truetype')
 }
 
+.root-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .page-container {
-    /* background-color: lightpink; */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 
 .container {
     /* background-color: lightseagreen; */
