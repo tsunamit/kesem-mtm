@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import AuctionItemContainer from '../containers/AuctionItemContainer';
+import ItemGrid from '../containers/ItemGrid';
 
 import { AUCTION } from '../../constants/model';
+
+import '../../styles/defaultStyles.css';
 
 const TITLE = 'Silent Auction';
 const DESCRIPTION = 'All proceeds support our campers! To participate please see our auction rules and agreement';
@@ -35,16 +38,17 @@ function AuctionPage({ firebase }) {
   }, []);
 
   return (
-    <div>
-      {/* Headers */}
-      <h1>{TITLE}</h1>
-      <br />
-      <p>{DESCRIPTION}</p>
-      <br />
-      <p>{AUCTION_DATES}</p>
+    <div className="page-container">
+      <div className="container">
+        {/* Headers */}
+        <h1 className="page-h1">{TITLE}</h1>
+        <p className="page-p">{DESCRIPTION}</p>
+        <p className="page-p bold">{AUCTION_DATES}</p>
+        <br />
 
-      {/* Auction items */}
-      {mapAuctionItemDataToContainers(auctionItems)}
+        {/* Auction items */}
+        <ItemGrid items={mapAuctionItemDataToContainers(auctionItems)} />
+      </div>
     </div>
   );
 }

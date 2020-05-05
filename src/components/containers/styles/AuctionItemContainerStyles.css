@@ -1,0 +1,37 @@
+.card-h1 {
+  font-family: Gilroy-Medium;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.card-p {
+  font-family: Gilroy-Regular;
+  text-align: center;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 50px;
+  box-shadow: 0px 5px 10px lightgrey;
+  width: 400px;
+  height: 350px;
+  margin-bottom: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.card-content-filler {
+  /* background-color: lightseagreen; */
+  height: 100%;
+}
+
+.content-container {
+  /* background-color: lightseagreen; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+}
