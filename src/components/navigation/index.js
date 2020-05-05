@@ -11,7 +11,7 @@ const Navigation = () => (
         <Link id = 'navigation-button' to={ROUTES.LANDING}><img id = 'ck-logo' src={logo} alt="CK Logo"/></Link>
         <div id= 'navigation-gap'></div> 
         <Link id = 'navigation-button' to={ROUTES.LANDING}>Welcome</Link>
-        <Link id = 'navigation-button' to={ROUTES.AUCTION}>About</Link>
+        <Link id = 'navigation-button' to={ROUTES.ABOUT}>About</Link>
         <Link id = 'navigation-button' to={ROUTES.PADDLE_HOME}>Paddle Raise</Link>
         <Link id = 'navigation-button' to={ROUTES.AUCTION}>Auction</Link>
         {/* TO DO: Change this link to be the ABOUT page */}
