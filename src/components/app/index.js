@@ -13,9 +13,11 @@ import AboutPage from '../pages/AboutPage';
 
 import * as ROUTES from '../../constants/routes';
 
+import '../../styles/defaultStyles.css';
+
 const App = () => (
   <Router>
-    <div>
+    <div className="root-container">
       <Navigation />
 
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
