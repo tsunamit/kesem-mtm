@@ -1,0 +1,41 @@
+#countdown-wrapper {
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+}
+
+#countdown-vertical {
+    width: 80px;
+    margin: 10px; 
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#countdown-box {
+    width: 80px;
+    height: 80px; 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    font-family: Gilroy-Bold;
+    border-radius: 10%;
+    background-color: #EFEFEF;
+    color: #0091BA;
+    font-size: 40px; 
+}
+
+#countdown-text {
+    text-align: center;
+    font-family: Gilroy-Bold; 
+    font-size: 24px;
+    letter-spacing: .03em;
+    color: #858585; 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+
+

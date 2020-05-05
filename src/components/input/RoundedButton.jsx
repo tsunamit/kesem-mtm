@@ -1,10 +1,10 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-
+import './styles/RoundedButtonStyles.css';
 function RoundedButton({ title, onClick }) {
   return (
-    <button type="button" onClick={() => onClick()}>
+    <button id="rounded-button" type="button" onClick={() => onClick()}>
       <p>{title}</p>
     </button>
   );
