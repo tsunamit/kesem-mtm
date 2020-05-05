@@ -23,10 +23,30 @@
     src: local('Gilroy-LIght'), url(../fonts/Gilroy-Light.ttf) format('truetype')
 }
 
-.container {
+.page-container {
+    /* background-color: lightpink; */
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    /* background-color: lightseagreen; */
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .page-h1 {
+    font-family: Gilroy-Medium;
+    font-weight: 700;
+    font-size: 50px;
+    letter-spacing: 2px;
+}
+
+.page-p {
+    font-family: Gilroy-Regular;
+}
+
+.bold {
     font-family: Gilroy-Bold;
 }
