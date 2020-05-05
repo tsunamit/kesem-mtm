@@ -1,0 +1,60 @@
+#welcome-banner {
+    font-family: Gilroy-Bold;
+    font-size: 90px;
+    color: #0091BA; 
+    padding-left: 17%;
+    padding-top: 7%;
+    line-height: 100%;
+    letter-spacing: 0.03em;
+    min-width: 750px;
+}
+#welcome-message {
+    color: gray;
+    padding-left: 17%;
+    padding-top: 1%;
+    font-family: Gilroy-Regular;
+    letter-spacing: 0.05em;
+    font-size: 30px;
+    min-width: 700px;
+}
+
+#bottom-container {
+    display: flex; 
+    padding-right: 25%;
+    padding-left: 25%;
+    padding-top: 7%;
+    justify-content: center;
+    align-items: center;
+}
+
+#link-to-stream {
+    flex: 1.5; 
+    text-align: center;
+    font-family: Gilroy-Bold;
+    font-size: 32px;
+}
+
+#link-to-stream-text {
+    color: #0091BA; 
+}
+
+#link-to-stream-button{
+    color: white;
+    font-family: Gilroy-Bold;
+    font-size: 28px;
+    background-color: #0091BA;
+    width: 240px;
+    height: 65px; 
+    border-radius: 20%;
+
+}
+
+#link-to-stream-button:hover{
+    background-color: #0091BA;
+    opacity: 75%;
+    cursor: pointer;
+}
+
+#countdown-wrapping {
+    flex: 1; 
+}
