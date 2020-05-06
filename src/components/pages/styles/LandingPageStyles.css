@@ -50,8 +50,7 @@
 }
 
 #link-to-stream-button:hover{
-    background-color: #0091BA;
-    opacity: 75%;
+    background-color: #00B0E2; 
     cursor: pointer;
 }
 
