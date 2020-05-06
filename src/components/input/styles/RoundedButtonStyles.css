@@ -12,7 +12,6 @@
 }
 
 #rounded-button:hover{
-    background-color: #05D39F;
-    opacity: 75%;
+    background-color: #18CD9F;
     cursor: pointer;
 }
