@@ -9,6 +9,8 @@ import PaddlePledgeIndicator from '../containers/PaddlePledgeIndicator';
 import DonationProgressBar from '../containers/DonationProgressBar';
 
 
+import './styles/PaddleSessionPageStyles.css'
+
 function PaddleSessionPage({ firebase, location }) {
   // use router history to access passes state
   const routerHistory = useHistory();
@@ -91,30 +93,32 @@ function PaddleSessionPage({ firebase, location }) {
       {
         sessionIsValid
           ? (
-            <div>
+            <div >
               <DonationProgressBar
                 currentDonationTotal={sessionData.donationTotal}
                 donationGoal={sessionData.donationGoal}
               />
-              <h1>[Picture]</h1>
-              <h1>Big Hill Sponsor</h1>
-              <h2>Provide Supplies For Virtual Camp</h2>
-              <PaddlePledgeIndicator
-                pledgeAmounts={sessionData.pledgeAmountSelections}
-                currentPledgeAmount={sessionData.currentPledgeAmount}
-              />
-              <br />
-              <PaddleActivityContainer
-                sessionPaddles={sessionPaddles}
-                user={user}
-              />
-              <br />
-              <PaddlePledgeContainer
-                firebase={firebase}
-                sessionId={sessionId}
-                user={user}
-                currentPledgeAmount={sessionData.currentPledgeAmount}
-              />
+              <div id = "main-area-container"> 
+                <div id = 'sponsor-info'>
+                  <h1>[Picture]</h1>
+                  <h1>Big Hill Sponsor</h1>
+                  <h2>Provide Supplies For Virtual Camp</h2>
+                  <PaddlePledgeIndicator
+                    pledgeAmounts={sessionData.pledgeAmountSelections}
+                    currentPledgeAmount={sessionData.currentPledgeAmount}
+                  />
+                </div>
+                <PaddleActivityContainer
+                  sessionPaddles={sessionPaddles}
+                  user={user}
+                />
+                <PaddlePledgeContainer
+                  firebase={firebase}
+                  sessionId={sessionId}
+                  user={user}
+                  currentPledgeAmount={sessionData.currentPledgeAmount}
+                />
+              </div> 
             </div>
           ) : (
             <p>Session invalid</p>

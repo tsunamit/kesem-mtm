@@ -11,7 +11,7 @@ function AuctionItemContainer({ title, description, itemOwner, link }) {
   const courtesyOfString = `Courtesy of ${itemOwner}`;
 
   const onClickLink = () => {
-    window.location.href = link;
+    window.open(link);
   };
 
   return (
