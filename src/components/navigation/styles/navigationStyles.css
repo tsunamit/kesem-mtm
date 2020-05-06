@@ -7,21 +7,22 @@
     align-items: center;
 }
 
-#navigation-button {
+.navigation-button {
     flex: 1; 
     text-decoration: none;
     color: black;
     font-family: Gilroy-Regular;
     letter-spacing: 0.04em;
     text-align: center;
+    padding-left: 20px;
 }
 
-#navigation-button:last-child{
+.navigation-button-selected {
     font-family: Gilroy-Bold;
     color: #0091BA; 
 }
 
-#navigation-button:hover {
+.navigation-button:hover {
     font-family: Gilroy-Medium;
 }
 
@@ -33,9 +34,4 @@
     flex: 1;
     max-height: 35px;
     max-width: 90px; 
-}
-
-ul {
-    padding: 0;
-    list-style: none;
 }
