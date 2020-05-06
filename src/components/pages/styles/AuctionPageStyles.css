@@ -1,5 +1,7 @@
 .wrapping-grid {
+  max-width: 1500px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
