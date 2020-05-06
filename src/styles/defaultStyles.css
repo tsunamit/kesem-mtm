@@ -47,6 +47,7 @@
     font-size: 50px;
     letter-spacing: .03em;
     padding-left: 10%;
+    padding-top: 2%;
 }
 
 .page-p {
@@ -69,4 +70,8 @@
 #link-style:hover {
     text-decoration: none;
     opacity: 75%; 
+}
+
+#footer{
+    height: 70px; 
 }

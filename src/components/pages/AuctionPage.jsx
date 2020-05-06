@@ -44,7 +44,7 @@ function AuctionPage({ firebase }) {
           <div className="page-h1">{TITLE}</div>
           <p className="page-p">
           To further support our campers, we are hosting a Virtual Silent Auction. All items in this auction have been generously donated by friends of Camp Kesem, 
-          and all proceeds from this auction directly support our campers! To participate please see our <b><a id = 'link-style' href="">auction rules and agreement</a></b> .
+          and all proceeds from this auction directly support our campers! To participate please see our <b><a id = 'link-style' href="">auction rules and agreement</a></b>.
 
           </p>
           <p className="page-p bold">{AUCTION_DATES}</p>
@@ -57,6 +57,7 @@ function AuctionPage({ firebase }) {
         </FadeIn>
         {/* <ItemGrid items={mapAuctionItemDataToContainers(auctionItems)} /> */}
       </div>
+      <div id = "footer"/>
     </div>
   );
 }
