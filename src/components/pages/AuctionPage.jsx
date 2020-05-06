@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import FadeIn from 'react-fade-in';
 
 import AuctionItemContainer from '../containers/AuctionItemContainer';
-
 import { AUCTION } from '../../constants/model';
 
 import '../../styles/defaultStyles.css';
@@ -41,15 +41,17 @@ function AuctionPage({ firebase }) {
     <div className="page-container">
       <div className="container">
         {/* Headers */}
-        <h1 className="page-h1">{TITLE}</h1>
-        <p className="page-p">{DESCRIPTION}</p>
-        <p className="page-p bold">{AUCTION_DATES}</p>
-        <br />
+        <FadeIn delay="500" transitionDuration="2000">
+          <h1 className="page-h1">{TITLE}</h1>
+          <p className="page-p">{DESCRIPTION}</p>
+          <p className="page-p bold">{AUCTION_DATES}</p>
+          <br />
 
-        {/* Auction items */}
-        <div className="wrapping-grid">
-          {mapAuctionItemDataToContainers(auctionItems)}
-        </div>
+          {/* Auction items */}
+          <div className="wrapping-grid">
+            {mapAuctionItemDataToContainers(auctionItems)}
+          </div>
+        </FadeIn>
         {/* <ItemGrid items={mapAuctionItemDataToContainers(auctionItems)} /> */}
       </div>
     </div>
