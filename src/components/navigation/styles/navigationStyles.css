@@ -7,7 +7,7 @@
     align-items: center;
 }
 
-#navigation-button {
+.navigation-button {
     flex: 1; 
     text-decoration: none;
     color: black;
@@ -16,7 +16,7 @@
     text-align: center;
 }
 
-#navigation-button:last-child{
+.navigation-button-selected {
     font-family: Gilroy-Bold;
     color: #0091BA; 
 }
