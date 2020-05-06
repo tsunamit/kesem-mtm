@@ -9,7 +9,6 @@ function CountdownContainer() {
 
     const calculateTimeLeft = () => {
         const difference = new Date(1589072400000) - Date.now();
-        console.log(Date())
         let timeLeft = {};
     
         if (difference > 0) {  
@@ -26,6 +25,7 @@ function CountdownContainer() {
         if (timeLeft.hours == 1) {
             hoursText = "hour"
         } else { hoursText = "hours"}
+
         if (timeLeft.minutes == 1) {
             minsText = "min"
         } else { minsText = "mins"}
@@ -46,8 +46,6 @@ function CountdownContainer() {
     Object.keys(timeLeft).forEach(interval => {
         timerComponents.push(timeLeft[interval]);
     });
-
-   
 
     return (
         <div id = 'countdown-wrapper'> 
