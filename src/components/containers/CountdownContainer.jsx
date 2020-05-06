@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './styles/CountdownContainerStyles.css'
 
-const MTM_DATE = "2020-05-09T18:00:00"
-
 function CountdownContainer() {
 
     let daysText = "days"
@@ -10,7 +8,7 @@ function CountdownContainer() {
     let minsText = "mins"
 
     const calculateTimeLeft = () => {
-        const difference = new Date(MTM_DATE) - Date.now();
+        const difference = new Date(1589072400000) - Date.now();
         console.log(Date())
         let timeLeft = {};
     
