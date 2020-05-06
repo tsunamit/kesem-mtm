@@ -1,0 +1,17 @@
+#outline-box {
+    padding-top: 3%;
+    color: #808080;
+}
+#outline-text {
+    width: 75%;
+    font-family: Gilroy-Regular;
+    color: #808080;
+    line-height: 230%;
+    padding-left: 4%;
+    letter-spacing: 0.05em;
+    font-size: 16px; 
+    border: none;
+    border:solid 1px #808080;
+    border-radius: 10px;
+}
+
