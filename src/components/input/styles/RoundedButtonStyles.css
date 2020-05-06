@@ -1,5 +1,18 @@
 #rounded-button{
-    border-radius: 19%;
+    color: white; 
+    background-color: #06B085;
+    border: none;
+    border-radius: 19px;
     font-family: Gilroy-Bold;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
+    padding-left: 3%;
+    padding-right: 3%;
+    font-size: 16px;
+    line-height: 90%;
+}
+
+#rounded-button:hover{
+    background-color: #05D39F;
+    opacity: 75%;
+    cursor: pointer;
 }

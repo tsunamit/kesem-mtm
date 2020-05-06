@@ -5,7 +5,7 @@ import FadeIn from 'react-fade-in';
 import FooterContainer from '../containers/FooterContainer';
 
 import pic_1 from '../../images/kesem-4.jpg'; 
-import pic_2 from '../../images/kesem-mtm-1.jpg'; 
+import pic_2 from '../../images/kesem-mtm-2.jpg'; 
 
 const WHAT_IS_CAMP_KESEM_PARAGRAPH = ''
 function AboutPage() {

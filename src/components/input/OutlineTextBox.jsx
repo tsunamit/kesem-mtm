@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './styles/OutlineTextBoxStyles.css';
+
 import PropTypes from 'prop-types';
 
 function OutlineTextBox({ placeholder, value, onChangeText }) {
@@ -9,8 +11,8 @@ function OutlineTextBox({ placeholder, value, onChangeText }) {
   };
 
   return (
-    <div>
-      <input
+    <div id= 'outline-box'>
+      <input id = 'outline-text'
         type="text"
         value={value}
         placeholder={placeholder}
