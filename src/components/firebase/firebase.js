@@ -98,6 +98,20 @@ class Firebase {
         return auctionCollectionDocData;
       })
   };
+
+  /**
+   * Get facebook live link
+   */
+  getFacebookLiveLink = async () => {
+    return this.firestore.collection('links').doc('facebookLive').get()
+      .then((facebookLiveDoc) => {
+        if (facebookLiveDoc.exists) {
+          return facebookLiveDoc.data().url;
+        } else {
+          return null;
+        }
+      });
+  }
 }
 
 export default Firebase;
