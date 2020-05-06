@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../styles/defaultStyles.css';
 import './styles/AboutPageStyles.css';
 import FadeIn from 'react-fade-in';
 
@@ -17,7 +18,7 @@ function AboutPage() {
                 What is Camp Kesem? 
             </div> 
             <div id = 'text-p'> 
-                Camp Kesem is a nationwide non-profit that supports children through and beyond a parent’s cancer, primarly by hosting free, week-long summer camps. All Camp Kesem chapters are lead by student volunteers who plan, organize, and host Friends and Family Days, fundraisers, counselor trainings, and the week of summer camp. This year, we are excited to announce a transition to <b>Kesem at Home</b>, in which we will engage our campers remotely. 
+                Camp Kesem is a nationwide non-profit that supports children through and beyond a parent’s cancer, primarily by hosting free, week-long summer camps. All Camp Kesem chapters are lead by student volunteers who plan, organize, and host Friends and Family Days, fundraisers, counselor trainings, and a week of summer camp. This year, we are excited to announce a transition to <b>Kesem at Home</b>, in which we will engage our campers remotely. 
                 <br></br> <br></br>
                 Here at Camp Kesem at UCLA, we are proud to serve over 260 children from the Greater Los Angeles Area. 
                 For more information on Camp Kesem at UCLA, please visit our <b> <a id = 'link-style' target= '_blank' href="https://www.campkesem.org/find-a-camp/camp-kesem-at-ucla">website</a></b>.
