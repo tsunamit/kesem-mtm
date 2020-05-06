@@ -9,8 +9,7 @@ import '../../styles/defaultStyles.css';
 import './styles/AuctionPageStyles.css';
 
 const TITLE = 'Silent Auction';
-const DESCRIPTION = 'All proceeds support our campers! To participate please see our auction rules and agreement';
-const AUCTION_DATES = 'Auction is open from May 5th - May 13th';
+const AUCTION_DATES = 'Auction is open from May 6th - May 13th.';
 
 function AuctionPage({ firebase }) {
   const [auctionItems, setAuctionItems] = useState([]);
@@ -28,7 +27,7 @@ function AuctionPage({ firebase }) {
   };
 
   /**
-   * On page load
+   * TODO: Add Link in a href for "auction rules and agreement"
    */
   useEffect(() => {
     firebase.getAuctionItems()
@@ -41,9 +40,13 @@ function AuctionPage({ firebase }) {
     <div className="page-container">
       <div className="container">
         {/* Headers */}
-        <FadeIn delay="500" transitionDuration="2000">
-          <h1 className="page-h1">{TITLE}</h1>
-          <p className="page-p">{DESCRIPTION}</p>
+        <FadeIn delay="300" transitionDuration="2000">
+          <div className="page-h1">{TITLE}</div>
+          <p className="page-p">
+          To further support our campers, we are hosting a Virtual Silent Auction. All items in this auction have been generously donated by friends of Camp Kesem, 
+          and all proceeds from this auction directly support our campers! To participate please see our <b><a id = 'link-style' href="">auction rules and agreement</a></b>.
+
+          </p>
           <p className="page-p bold">{AUCTION_DATES}</p>
           <br />
 
@@ -54,6 +57,7 @@ function AuctionPage({ firebase }) {
         </FadeIn>
         {/* <ItemGrid items={mapAuctionItemDataToContainers(auctionItems)} /> */}
       </div>
+      <div id = "footer"/>
     </div>
   );
 }

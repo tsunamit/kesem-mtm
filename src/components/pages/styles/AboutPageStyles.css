@@ -34,14 +34,3 @@
     align-self: center; 
     border-radius: 15px;
 }
-
-#link-style {
-    text-decoration: none;
-    color: #0091BA; 
-    font-family: Gilroy-Medium;
-}
-
-#link-style:hover {
-    text-decoration: none;
-    opacity: 75%; 
-}
