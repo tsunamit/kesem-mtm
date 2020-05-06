@@ -1,0 +1,36 @@
+#horizontal-wrapper {
+    display: flex; 
+    width: 70%; 
+    padding-left: 15%; 
+    padding-right: 15%; 
+    padding-top: 5%; 
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#text-wrapper {
+    width: 55%; 
+}
+
+#text-h1 {
+    color: #474747; 
+    font-family: Gilroy-Bold;
+    font-size: 32px;
+    padding-bottom: 20px;
+}
+
+#text-p {
+    font-family: Gilroy-Regular;
+    color: gray;
+    font-size: 16px; 
+    letter-spacing: .05em;
+}
+
+#image-wrapper {
+    width: 40%;
+    max-height: 400px;
+    max-width: 400px;
+    align-self: center; 
+    border-radius: 15px;
+}

@@ -1,37 +1,38 @@
 .card-h1 {
   font-family: Gilroy-Medium;
   font-weight: 700;
+  font-size: 24px;
   text-align: center;
   letter-spacing: 2px;
+  color:#474747; 
 }
 
 .card-p {
   font-family: Gilroy-Regular;
+  font-size: 14px;
   text-align: center;
+  letter-spacing: .03em;
 }
 
 .card-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  padding: 10px;
+  width: 25%;
+  min-width: 200px; 
   border-radius: 50px;
-  box-shadow: 0px 5px 10px lightgrey;
-  width: 400px;
-  height: 350px;
-  margin-bottom: 50px;
-  margin-left: 50px;
-  margin-right: 50px;
+  box-shadow: 0px 20px 40px  #EDEBEB;
+  margin-bottom: 20px;
+  padding: 20px;
 }
 
 .card-content-filler {
-  /* background-color: lightseagreen; */
-  height: 100%;
+  flex: 1;
 }
 
 .content-container {
-  /* background-color: lightseagreen; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 20px;
+  flex: 1;
 }

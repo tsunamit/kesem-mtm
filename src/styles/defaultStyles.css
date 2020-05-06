@@ -23,12 +23,17 @@
     src: local('Gilroy-LIght'), url(../fonts/Gilroy-Light.ttf) format('truetype')
 }
 
+.root-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .page-container {
-    /* background-color: lightpink; */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 
 .container {
     /* background-color: lightseagreen; */
@@ -40,13 +45,34 @@
     font-family: Gilroy-Medium;
     font-weight: 700;
     font-size: 50px;
-    letter-spacing: 2px;
+    letter-spacing: .03em;
+    padding-left: 10%;
+    padding-top: 2%;
 }
 
 .page-p {
     font-family: Gilroy-Regular;
+    padding-left: 10%;
+    letter-spacing: .03em; 
+    width: 70%; 
+    color:#474747; 
 }
 
 .bold {
     font-family: Gilroy-Bold;
+}
+
+#link-style {
+    text-decoration: none;
+    color: #0091BA; 
+    font-family: Gilroy-Medium;
+}
+
+#link-style:hover {
+    text-decoration: none;
+    opacity: 75%; 
+}
+
+#footer{
+    height: 70px; 
 }

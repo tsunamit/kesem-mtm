@@ -12,7 +12,7 @@ function PaddleActivityContainer({ sessionPaddles }) {
   const totalPaddlesRaised = sessionPaddles.length;
 
   return (
-    <CardContainer>
+    <div>
       <h2>{totalPaddlesRaised} paddles raised</h2>
       <hr />
       {sessionPaddles.map((paddle) => (
@@ -20,7 +20,7 @@ function PaddleActivityContainer({ sessionPaddles }) {
           {paddleLogMessage(paddle.screenName, paddle.amountPledged)}
         </p>
       ))}
-    </CardContainer>
+    </div>
   );
 }
 
