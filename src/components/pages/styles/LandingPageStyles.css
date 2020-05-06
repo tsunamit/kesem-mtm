@@ -46,7 +46,7 @@
     width: 240px;
     height: 65px; 
     border-radius: 20px;
-
+    border: none;
 }
 
 #link-to-stream-button:hover{
