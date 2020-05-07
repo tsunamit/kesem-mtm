@@ -94,19 +94,27 @@ class Firebase {
   }
 
   /**
-   * Increment the paddle ID atomically and return the new value. Should result in a unique ID. 
+   * Atomically read the current paddle counter and assign this to ourself.
+   * Then increment the counter so the next person who reads will have a
+   * unique, higher number
    */
   getUniquePaddleId = async (sessionId) => {
     const atomicIncrementPaddleId = firebase.firestore.FieldValue.increment(1);
-    return this.sessionDocReference(sessionId).update({
-      paddleIdCounter: atomicIncrementPaddleId
-    })
-    .then((updatedDoc) => {
-      console.log(updatedDoc);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    const sessionDocReference = this.sessionDocReference(sessionId);
+
+    let uniquePaddleId;
+
+    const atomicUniquePaddleTransaction = await this.firestore.runTransaction(async t => {
+      const sessionDocResult = await t.get(sessionDocReference);
+
+      uniquePaddleId = sessionDocResult.data()[sessionDataModel.paddleIdCounter];
+
+      await t.update(sessionDocReference, {
+        [sessionDataModel.paddleIdCounter]: atomicIncrementPaddleId,
+      });
+    });
+
+    return uniquePaddleId;
   }
 
   /**

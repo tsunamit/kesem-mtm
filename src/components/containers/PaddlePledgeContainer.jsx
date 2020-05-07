@@ -17,7 +17,7 @@ function PaddlePledgeContainer({
       <div className="paddle-pledge-container-p">
         Screen Name:
         <br />
-        {' '}<b>{' '}{user.name}{' '}</b>
+        {' '}<b>{' '}{user.screenName}{' '}</b>
       </div>
       <div className="paddle-pledge-container-h2">Pledge to give</div>
       <div className="paddle-pledge-container-h1">

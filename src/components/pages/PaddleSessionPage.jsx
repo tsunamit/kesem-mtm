@@ -91,7 +91,7 @@ function PaddleSessionPage({ firebase, location }) {
     // Get screen name if we don't have screen name already
     if (routerState.screenName === '') {
       console.log('generating screen name');
-      firebase.getUniquePaddleId()
+      firebase.getUniquePaddleId(urlVars.sessionId)
         .then((uniquePaddleId) => {
           setUser((prevUserState) => ({
             name: prevUserState.name,
@@ -123,8 +123,8 @@ function PaddleSessionPage({ firebase, location }) {
                     </div>
                   </div>
                   <PaddlePledgeIndicator
-                      pledgeAmounts={sessionData.pledgeAmountSelections}
-                      currentPledgeAmount={sessionData.currentPledgeAmount}
+                    pledgeAmounts={sessionData.pledgeAmountSelections}
+                    currentPledgeAmount={sessionData.currentPledgeAmount}
                     />
                 </div>
                 <PaddleActivityContainer
