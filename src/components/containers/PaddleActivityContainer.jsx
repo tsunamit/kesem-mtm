@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
-import CardContainer from './CardContainer';
+import './styles/PaddleActivityContainerStyles.css'; 
 
 const paddleLogMessage = (screenName, amountPledged) => (
   `${screenName} just raised for ${amountPledged}`
@@ -12,14 +12,19 @@ function PaddleActivityContainer({ sessionPaddles }) {
   const totalPaddlesRaised = sessionPaddles.length;
 
   return (
-    <div>
-      <h2>{totalPaddlesRaised} paddles raised</h2>
-      <hr />
-      {sessionPaddles.map((paddle) => (
-        <p key={paddle.screenName + paddle.amountPledged.toString()}>
-          {paddleLogMessage(paddle.screenName, paddle.amountPledged)}
-        </p>
-      ))}
+    <div className="paddle-activity-container">
+      <div className="paddle-activity-header">
+        {totalPaddlesRaised}  paddles raised
+      </div>
+      <div className="paddle-activity-message-container-extra-wrapper">
+        <div className="paddle-activity-message-container">
+          {sessionPaddles.map((paddle) => (
+            <div className="paddle-activity-message" key={paddle.screenName + paddle.amountPledged.toString()}>
+              {paddleLogMessage(paddle.screenName, paddle.amountPledged)}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

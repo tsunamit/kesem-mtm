@@ -10,12 +10,14 @@ function PaddlePledgeContainer({ firebase, user, currentPledgeAmount, sessionId 
     firebase.addPaddle(user.name, user.screenName, user.email, currentPledgeAmount, sessionId);
   };
 
-  return (
-    <div id = 'paddle-pledge-container'>
-      <p>You are {user.name}.</p>
-      <h2>Pledge to give</h2>
-      <h1>${currentPledgeAmount}</h1>
-      <RoundedButton title="Raise my paddle!" onClick={() => onClickRaisePaddle()} />
+  return ( 
+    <div className='paddle-pledge-container'>
+      <div className='paddle-pledge-container-p'>Screen Name: <br></br> <b> {user.name} </b></div>
+      <div className='paddle-pledge-container-h2'>Pledge to give</div>
+      <div className='paddle-pledge-container-h1'>${currentPledgeAmount}</div>
+      <div className= "paddle-pledge-button-wrapper"> 
+        <RoundedButton title="Raise my paddle!" onClick={() => onClickRaisePaddle()} />
+      </div>
     </div>
   );
 }
