@@ -6,6 +6,7 @@
     text-align: center;
     height: 400px;
     min-width: 200px;
+    max-width: 300px;
     display: flex;
     justify-content: center;
     align-content: center;
