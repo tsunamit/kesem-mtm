@@ -8,7 +8,7 @@ import PaddleActivityContainer from '../containers/PaddleActivityContainer';
 import PaddlePledgeContainer from '../containers/PaddlePledgeContainer';
 import PaddlePledgeIndicator from '../containers/PaddlePledgeIndicator';
 import DonationProgressBar from '../containers/DonationProgressBar';
-
+import FooterContainer from '../containers/FooterContainer';
 import img_1 from '../../images/kesem-2.jpg'
 
 import './styles/PaddleSessionPageStyles.css'
@@ -126,6 +126,8 @@ function PaddleSessionPage({ firebase, location }) {
                   currentPledgeAmount={sessionData.currentPledgeAmount}
                 />
               </div> 
+              <FooterContainer> 
+                </FooterContainer>
             </FadeIn>
           ) : (
             <p>Session invalid</p>

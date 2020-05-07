@@ -23,3 +23,10 @@
     border: solid 2px #06B085;
     outline-style: none;
 }
+
+@media screen and (max-width: 450px) {
+
+    #outline-text {
+        font-size: 12px; 
+    }
+  }

@@ -39,3 +39,17 @@
 
 
 
+@media screen and (max-width: 450px) {
+    #countdown-vertical  {
+        width: 30px; 
+    }
+    #countdown-box {
+        width: 30px; 
+        height: 30px; 
+        font-size: 18px; 
+    }
+    #countdown-text {
+        font-size: 12px;
+    }
+
+}
