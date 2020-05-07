@@ -32,3 +32,10 @@
     color: #0091BA;
 }
 
+@media screen and (max-width: 450px) {
+
+    .paddle-pledge-indicator {
+        order: 3; 
+    }
+
+  }

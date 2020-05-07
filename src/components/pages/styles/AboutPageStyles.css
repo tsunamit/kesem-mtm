@@ -10,7 +10,9 @@
 }
 
 #text-wrapper {
+    padding-top: 5%; 
     width: 55%; 
+    min-width: 250px; 
 }
 
 #text-h1 {
@@ -29,8 +31,10 @@
 
 #image-wrapper {
     width: 40%;
+    margin-top: 3%; 
     max-height: 400px;
     max-width: 400px;
+    min-width: 250px; 
     align-self: center; 
     border-radius: 15px;
 }
