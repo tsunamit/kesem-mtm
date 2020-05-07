@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import queryString from 'query-string';
 import PropTypes from 'prop-types';
+import FadeIn from 'react-fade-in';
 
 import PaddleActivityContainer from '../containers/PaddleActivityContainer';
 import PaddlePledgeContainer from '../containers/PaddlePledgeContainer';
 import PaddlePledgeIndicator from '../containers/PaddlePledgeIndicator';
 import DonationProgressBar from '../containers/DonationProgressBar';
-
+import FooterContainer from '../containers/FooterContainer';
 import img_1 from '../../images/kesem-2.jpg'
 
 import './styles/PaddleSessionPageStyles.css'
@@ -107,7 +108,7 @@ function PaddleSessionPage({ firebase, location }) {
       {
         sessionIsValid
           ? (
-            <div >
+            <FadeIn delay = '500' transitionDuration = '2000'>
               <DonationProgressBar
                 currentDonationTotal={sessionData.donationTotal}
                 donationGoal={sessionData.donationGoal}
@@ -138,7 +139,9 @@ function PaddleSessionPage({ firebase, location }) {
                   currentPledgeAmount={sessionData.currentPledgeAmount}
                 />
               </div> 
-            </div>
+              <FooterContainer> 
+                </FooterContainer>
+            </FadeIn>
           ) : (
             <p>Session invalid</p>
           )

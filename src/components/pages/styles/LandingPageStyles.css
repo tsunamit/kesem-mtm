@@ -57,3 +57,30 @@
 #countdown-wrapping {
     flex: 1; 
 }
+
+@media screen and (max-width: 450px) {
+    #welcome-banner  {
+        font-size: 35px;
+        min-width: 300px;
+        padding-left: 12%;
+    }
+    #welcome-message {
+        font-size: 12px;
+        min-width: 300px;
+        padding-left: 12%;
+    }
+    #bottom-container {
+        margin-left: 10%;
+    }
+    #link-to-stream-button {
+        font-size: 28px;
+        width: 100px;
+        height: 30px; 
+        font-size: 12px; 
+        border-radius: 10px;
+    }
+
+    #link-to-stream {
+        font-size: 12px;
+    }
+}

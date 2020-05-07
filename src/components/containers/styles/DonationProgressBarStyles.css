@@ -34,3 +34,9 @@
 .bar {
     background-color: black;
 }
+
+@media screen and (max-width: 450px) { 
+    .progress-bar-text {
+        font-size: 24px; 
+    }
+}

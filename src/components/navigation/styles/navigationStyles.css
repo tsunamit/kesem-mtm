@@ -35,3 +35,12 @@
     max-height: 35px;
     max-width: 90px; 
 }
+
+@media screen and (max-width: 450px) {
+    #navigation-gap {
+        flex: 0; 
+    }
+    .navigation-button {
+        font-size: 12px; 
+    }
+}
