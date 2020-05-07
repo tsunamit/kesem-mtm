@@ -76,7 +76,7 @@ function JoinPaddleRaiseContainer({ firebase }) {
 
   const onClickJoin = async () => {
     const isValid = await formIsValid();
-    console.log("form status: ", isValid);
+
     if (isValid) {
       routerHistory.push({
         pathname: ROUTES.PADDLE_SESSION,
@@ -92,8 +92,8 @@ function JoinPaddleRaiseContainer({ firebase }) {
 
   return (
     <div id="card-container">
-      <div id='card-container-h1'>{JOIN_PADDLE_RAISE_TITLE}</div>
-      <div id='card-container-p'>{JOIN_DESCRIPTION}</div>
+      <div id="card-container-h1">{JOIN_PADDLE_RAISE_TITLE}</div>
+      <div id="card-container-p">{JOIN_DESCRIPTION}</div>
       <OutlineTextBox
         value={paddleRaiseName}
         placeholder={JOIN_NAME_PLACEHOLDER}
@@ -129,13 +129,13 @@ function JoinPaddleRaiseContainer({ firebase }) {
         onChangeText={(text) => setPaddleRaiseSessionId(text)}
       />
       {
-        paddleRaiseSessionIdIsValid 
+        paddleRaiseSessionIdIsValid
           ? null
           : (
             <p className="invalid-form-entry-p">{INVALID_SESSION_ID}</p>
           )
       }
-      <div id ='card-container-fine-text'>{SCREEN_NAME_DESCRIPTION}</div>
+      <div id="card-container-fine-text">{SCREEN_NAME_DESCRIPTION}</div>
       <RoundedButton title={ENTER_PADDLE_RAISE_BTN_TEXT} onClick={async () => onClickJoin()} />
     </div>
   );

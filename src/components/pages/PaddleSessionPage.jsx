@@ -87,6 +87,19 @@ function PaddleSessionPage({ firebase, location }) {
       urlVars.sessionId,
       (sessionDocSnapshot) => onSessionUpdate(sessionDocSnapshot),
     );
+
+    // Get screen name if we don't have screen name already
+    if (routerState.screenName === '') {
+      console.log('generating screen name');
+      firebase.getUniquePaddleId()
+        .then((uniquePaddleId) => {
+          setUser((prevUserState) => ({
+            name: prevUserState.name,
+            email: prevUserState.email,
+            screenName: `Paddle #${uniquePaddleId}`,
+          }));
+        });
+    }
   }, []);
 
   return (
