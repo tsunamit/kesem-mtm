@@ -41,6 +41,13 @@ class Firebase {
     });
   }
 
+  sessionExists = async (sessionId) => {
+    return this.sessionDocReference(sessionId).get()
+      .then((doc) => {
+        return doc.exists;
+      });
+  }
+
   /**
    * Get a reference to the paddles collection for a particular session. Need
    * this unordered version to be able to add new paddles
