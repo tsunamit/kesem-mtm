@@ -149,6 +149,16 @@ class Firebase {
    */
   createNewPaddleSession = async (sessionId) => {
     console.log('TODO create new session: ', sessionId);
+    return this.firestore.doc(`sessions/${sessionId}`).set({
+      [sessionDataModel.currentPledgeAmount]: 2500,
+      [sessionDataModel.donationGoal]: 20000,
+      [sessionDataModel.donationTotal]: 0,
+      [sessionDataModel.pledgeAmountSelections]: [2500, 1000, 500, 250, 100, 50, 20],
+      [sessionDataModel.paddleIdCounter]: 0,
+    })
+    .then(() => {
+      console.log(`Created new session ${sessionId} successfully!`);
+    });
   }
 }
 

@@ -6,8 +6,8 @@ import RoundedButton from '../input/RoundedButton';
 function AdminPage({ firebase }) {
   const [newSessionId, setNewSessionId] = useState('');
 
-  const createNewSession = () => {
-    firebase.createNewPaddleSession(newSessionId);
+  const createNewSession = async () => {
+    await firebase.createNewPaddleSession(newSessionId);
   };
 
   return (
@@ -25,7 +25,7 @@ function AdminPage({ firebase }) {
         <br />
         <RoundedButton
           title="Create new session"
-          onClick={() => createNewSession()}
+          onClick={async () => createNewSession()}
         />
       </div>
 
