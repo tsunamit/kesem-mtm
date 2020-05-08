@@ -103,6 +103,7 @@ function PaddleSessionPage({ firebase, location }) {
     }
   }, []);
 
+
   return (
     <div>
       {

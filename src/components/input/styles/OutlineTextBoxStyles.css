@@ -1,9 +1,8 @@
-#outline-box {
+.outline-box {
     padding-top: 3%;
     color: #808080;
 }
-
-#outline-text {
+.outline-text {
     width: 75%;
     font-family: Gilroy-Regular;
     color: #000000;
@@ -15,18 +14,18 @@
     border-radius: 10px;
 }
 
-#outline-text::placeholder {
+.outline-text::placeholder {
     color: #808080;
 }
 
-#outline-text:focus {
+.outline-text:focus {
     border: solid 2px #06B085;
     outline-style: none;
 }
 
 @media screen and (max-width: 450px) {
 
-    #outline-text {
+    .outline-text {
         font-size: 12px; 
     }
   }

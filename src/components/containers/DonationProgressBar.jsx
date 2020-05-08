@@ -4,6 +4,12 @@ import './styles/DonationProgressBarStyles.css'
 
 function DonationProgressBar({ donationGoal, currentDonationTotal }) {
   const percentComplete = Math.min(1.0, currentDonationTotal / donationGoal) * 100;
+
+
+  const prettyNumberHelper = (uglyNumber) => {
+    return uglyNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   return (
     <div className="progress-bar-wrapper">
       <div className="progress-bar-text-wrapper"> 
@@ -11,10 +17,10 @@ function DonationProgressBar({ donationGoal, currentDonationTotal }) {
           {`$0`}
         </div>
         <div className="progress-bar-text">
-          ${currentDonationTotal}
+          ${prettyNumberHelper(currentDonationTotal)}
         </div>
         <div className="progress-bar-text">
-          ${donationGoal}
+          ${prettyNumberHelper(donationGoal)}
         </div>
       </div> 
       <div className="progress-bar-graphic-outline"> 

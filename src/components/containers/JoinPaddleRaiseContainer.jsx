@@ -17,7 +17,8 @@ const JOIN_NAME_PLACEHOLDER = 'Full Name';
 const JOIN_EMAIL_PLACEHOLDER = 'Email Address';
 const JOIN_SCREEN_NAME_PLACEHOLDER = 'Screen Name (Optional)';
 const SCREEN_NAME_DESCRIPTION = 'Your screen name will be visible to the lobby when you raise your paddle. If left blank, we will assign you a paddle number.';
-const JOIN_SESSION_ID_PLACEHOLDER = 'Session Password';
+const JOIN_SESSION_ID_PLACEHOLDER = 'Session ID';
+const SESSION_ID_DESCRIPTION = 'The Session ID will be provided during the livestream. If you missed the ID, please comment in the livestream chat. '
 const ENTER_PADDLE_RAISE_BTN_TEXT = 'Enter Paddle Raise';
 
 const INVALID_NAME = '* Please enter a name.';
@@ -123,6 +124,7 @@ function JoinPaddleRaiseContainer({ firebase }) {
         placeholder={JOIN_SCREEN_NAME_PLACEHOLDER}
         onChangeText={(text) => setPaddleRaiseScreenName(text)}
       />
+      <div id="card-container-fine-text-first">{SCREEN_NAME_DESCRIPTION}</div>
       <OutlineTextBox
         value={paddleRaiseSessionId}
         placeholder={JOIN_SESSION_ID_PLACEHOLDER}
@@ -135,7 +137,7 @@ function JoinPaddleRaiseContainer({ firebase }) {
             <p className="invalid-form-entry-p">{INVALID_SESSION_ID}</p>
           )
       }
-      <div id="card-container-fine-text">{SCREEN_NAME_DESCRIPTION}</div>
+      <div id="card-container-fine-text"> {SESSION_ID_DESCRIPTION}</div> 
       <RoundedButton title={ENTER_PADDLE_RAISE_BTN_TEXT} onClick={async () => onClickJoin()} />
     </div>
   );

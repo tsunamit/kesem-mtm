@@ -11,8 +11,8 @@ function OutlineTextBox({ placeholder, value, onChangeText }) {
   };
 
   return (
-    <div id= 'outline-box'>
-      <input id = 'outline-text'
+    <div className="outline-box">
+      <input className="outline-text"
         type="text"
         value={value}
         placeholder={placeholder}
