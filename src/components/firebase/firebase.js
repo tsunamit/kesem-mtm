@@ -119,6 +119,13 @@ class Firebase {
         }
       });
   }
+
+  /**
+   * Create a new session with all session document data initialized as well as a subcollection for paddles
+   */
+  createNewPaddleSession = async (sessionId) => {
+    console.log('TODO create new session: ', sessionId);
+  }
 }
 
 export default Firebase;

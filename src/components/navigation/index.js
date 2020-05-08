@@ -38,6 +38,9 @@ function Navigation() {
       <Link className={getButtonStyle(currentRoute, ROUTES.AUCTION)} to={ROUTES.AUCTION}>
         Auction
       </Link>
+      <Link className={getButtonStyle(currentRoute, ROUTES.ADMIN)} to={ROUTES.ADMIN}>
+        Admin 
+      </Link>
     </div>
   );
 }

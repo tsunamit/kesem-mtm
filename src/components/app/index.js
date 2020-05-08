@@ -10,6 +10,7 @@ import PaddleHomePage from '../pages/PaddleHomePage';
 import PaddleSessionPage from '../pages/PaddleSessionPage';
 import AuctionPage from '../pages/AuctionPage';
 import AboutPage from '../pages/AboutPage';
+import AdminPage from '../pages/AdminPage';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -44,6 +45,13 @@ const App = () => (
               render={(props) => (
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 <PaddleSessionPage {...props} firebase={firebase} />
+              )}
+            />
+            <Route
+              path={ROUTES.ADMIN}
+              render={(props) => (
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                <AdminPage {...props} firebase={firebase} />
               )}
             />
           </>
