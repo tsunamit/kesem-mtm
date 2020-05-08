@@ -3,7 +3,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 
 import PropTypes from 'prop-types';
-import './styles/PaddlePledgeContainerStyles.css'
+import './styles/PaddlePledgeContainerStyles.css';
 
 import RoundedButton from '../input/RoundedButton';
 
