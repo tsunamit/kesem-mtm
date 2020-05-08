@@ -9,6 +9,9 @@ import PaddlePledgeContainer from '../containers/PaddlePledgeContainer';
 import PaddlePledgeIndicator from '../containers/PaddlePledgeIndicator';
 import DonationProgressBar from '../containers/DonationProgressBar';
 import FooterContainer from '../containers/FooterContainer';
+
+import { paddleSessionTypes } from '../../constants/model';
+
 import img_1 from '../../images/kesem-2.jpg'
 
 import './styles/PaddleSessionPageStyles.css'
@@ -55,7 +58,9 @@ function PaddleSessionPage({ firebase, location }) {
     firebase.subscribeToPaddles(
       sessionId,
       (querySnapshot) => {
-        setSessionPaddles(querySnapshot.docs.map((doc) => doc.data()));
+        setSessionPaddles(
+          querySnapshot.docs.map((doc) => doc.data()),
+        );
       },
     );
   };
@@ -68,6 +73,17 @@ function PaddleSessionPage({ firebase, location }) {
       subscribeToPaddles();
     }
   }, [sessionIsValid]);
+
+  /**
+   * On update to user screen name
+   */
+  useEffect(() => {
+    if (user.screenName === '' || user.email === '' || sessionId === '') {
+      return;
+    }
+
+    firebase.addJoinSessionNotification(user.screenName, user.email, sessionId);
+  }, [user.screenName, user.email, sessionId]);
 
   // on load
   useEffect(() => {

@@ -2,7 +2,12 @@ import app from 'firebase/app';
 import 'firebase/firestore';
 import firebase from 'firebase';
 
-import { sessionData as sessionDataModel, AUCTION } from '../../constants/model';
+import {
+  sessionData as sessionDataModel,
+  AUCTION,
+  paddleDataModel,
+  paddleSessionTypes,
+} from '../../constants/model';
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -68,21 +73,52 @@ class Firebase {
    */
   addPaddle = async (name, screenName, email, amountPledged, sessionId) => {
     // generate a timestamp
-    let createdAt = firebase.firestore.FieldValue.serverTimestamp();
+    const createdAt = firebase.firestore.FieldValue.serverTimestamp();
 
     // add paddle to the list of paddles raised
     this.paddlesCollection(sessionId).add({
-      name,
-      screenName,
-      email,
-      amountPledged,
-      createdAt,
+      [paddleDataModel.type]: paddleSessionTypes.paddle,
+      [paddleDataModel.name]: name,
+      [paddleDataModel.screenName]: screenName,
+      [paddleDataModel.email]: email,
+      [paddleDataModel.amountPledged]: amountPledged,
+      [paddleDataModel.createdAt]: createdAt,
     });
 
     // increment the donation total
     const atomicIncrement = firebase.firestore.FieldValue.increment(amountPledged);
     this.sessionDocReference(sessionId).update({
       [sessionDataModel.donationTotal]: atomicIncrement
+    });
+  }
+
+  /**
+   * Add join notification to paddles collection
+   */
+  addJoinSessionNotification = async (screenName, email, sessionId) => {
+    const joinedAt = firebase.firestore.FieldValue.serverTimestamp();
+
+    // add paddle to the list of paddles raised
+    this.paddlesCollection(sessionId).add({
+      [paddleDataModel.type]: paddleSessionTypes.joinNotification,
+      [paddleDataModel.screenName]: screenName,
+      [paddleDataModel.email]: email,
+      [paddleDataModel.createdAt]: joinedAt,
+    });
+  }
+
+  /**
+   * Add left paddle session notification to paddles collection
+   */
+  addLeftSessionNotification = async (screenName, email, sessionId) => {
+    const leftSessionAt = firebase.firestore.FieldValue.serverTimestamp();
+
+    // add paddle to the list of paddles raised
+    this.paddlesCollection(sessionId).add({
+      [paddleDataModel.type]: paddleSessionTypes.leftNotification,
+      [paddleDataModel.screenName]: screenName,
+      [paddleDataModel.email]: email,
+      [paddleDataModel.createdAt]: leftSessionAt,
     });
   }
 
