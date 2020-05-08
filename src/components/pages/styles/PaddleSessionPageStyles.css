@@ -9,36 +9,41 @@
 }
 
 .sponsor-info-container {
-    margin-top: 5%;
-    align-self: center;
     flex: 2; 
+    margin-top: 5%;
+    padding: 2%; 
+    box-shadow: 0px 20px 40px #EDEBEB;
+    border-radius: 15px; 
+    align-self: center;
     min-width: 300px;
     display: flex; 
-    flex-direction:column;
+}
+
+.sponsor-info-img-text-container {
+    flex: 4; 
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
-.sponsor-info-text-img-container {
-    display: flex; 
-    justify-content: space-between;
-}
-
 .sponsor-info-img {
-    width: 60%; 
+    width: 90%; 
+    min-width: 150px; 
+    height: auto; 
     border-radius: 15px;
     box-shadow: 0px 10px 20px #EDEBEB;
 }
 
 .sponsor-info-text {
-    width: 40%; 
-    min-width: 130px;
-    padding-left: 3%;
-    padding-right: 3%;
+    min-width: 150px;
+    padding: 3%; 
     align-self: center; 
     text-align: center;
 }
 .sponsor-info-text h1 {
-    font-family: Gilroy-Medium;
+    font-family: Gilroy-Bold;
+    font-weight: normal;
     font-size: 24px;
     letter-spacing: .03em;
 }
