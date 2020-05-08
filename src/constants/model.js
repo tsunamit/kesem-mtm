@@ -6,12 +6,19 @@ export const sessionData = {
   paddleIdCounter: 'paddleIdCounter',
 };
 
-export const paddle = {
+export const paddleDataModel = {
+  type: 'type',
   name: 'name',
   screenName: 'screenName',
   email: 'email',
   amountPledged: 'amountPledged',
   createdAt: 'createdAt',
+};
+
+export const paddleSessionTypes = {
+  paddle: 'PADDLE',
+  joinNotification: 'JOIN_NOTIFICATION',
+  leftNotification: 'LEFT_NOTIFICATION',
 };
 
 export const AUCTION = {
