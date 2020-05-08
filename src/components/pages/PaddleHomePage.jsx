@@ -6,7 +6,6 @@ import FirebaseContext from '../firebase/context';
 import './styles/PaddleHomePageStyles.css';
 
 import FooterContainer from '../containers/FooterContainer';
-import CardContainer from '../containers/CardContainer';
 import img_1 from '../../images/kesem-mtm-1.jpg'
 import JoinPaddleRaiseContainer from '../containers/JoinPaddleRaiseContainer';
 
