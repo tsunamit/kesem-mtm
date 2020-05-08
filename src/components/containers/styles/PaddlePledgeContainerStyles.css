@@ -139,8 +139,9 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 450px) { 
+@media screen and (max-width: 501px) { 
     .paddle-pledge-container {
+        order: 2; 
         height: 300px;
     }
     .confirmation-custom-ui {
