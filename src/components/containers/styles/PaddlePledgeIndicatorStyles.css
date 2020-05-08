@@ -1,0 +1,40 @@
+.pledge-indicator {
+    border: 1px; 
+    border-style: solid;
+    border-radius: 15px;
+    border: none;
+    min-width: 70px;
+    height: 40px;
+    align-items: center;
+    display: flex; 
+    justify-content: center;
+}
+
+.paddle-pledge-indicator {
+    padding-top: 5%;
+    width: 95%;
+    display: flex; 
+    justify-content: space-evenly;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.pledge-indicator-text {
+
+}
+
+.pledge-indicator-text-selected {
+    font-family: Gilroy-Bold;
+    font-size: 20px;
+    color: #0091BA;
+}
+
+@media screen and (max-width: 450px) {
+
+    .paddle-pledge-indicator {
+        order: 3; 
+    }
+
+  }

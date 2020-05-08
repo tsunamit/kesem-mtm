@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../styles/defaultStyles.css';
 import './styles/AboutPageStyles.css';
+import FooterContainter from '../containers/FooterContainer'
 import FadeIn from 'react-fade-in';
 
 import pic_1 from '../../images/kesem-4.jpg'; 
@@ -44,7 +45,7 @@ function AboutPage() {
         </div> 
       </div> 
       <div id = "footer"/>
-
+      <FooterContainter></FooterContainter>
     </FadeIn> 
   );
 }

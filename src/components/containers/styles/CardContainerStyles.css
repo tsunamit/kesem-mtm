@@ -5,6 +5,8 @@
   border-radius: 20px;
   box-shadow: 0px 20px 40px #EDEBEB;
   width: 35%;
+  min-width: 260px;
+  max-width: 400px; 
   align-self: center;
 }
 
@@ -25,10 +27,24 @@
   padding-bottom: 3%;
 }
 
+#card-container-fine-text-first {
+  color: #808080; 
+  padding-top: 3%; 
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+
 #card-container-fine-text {
   color: #808080; 
   padding-top: 3%; 
   padding-bottom: 3%; 
   font-size: 11px;
   letter-spacing: 0.03em;
+}
+
+@media screen and (max-width: 450px) {
+  #card-container {
+    padding: 8%; 
+    margin-top: 5%;
+  }
 }

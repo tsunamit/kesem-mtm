@@ -19,32 +19,36 @@ const App = () => (
   <Router>
     <div className="root-container">
       <Navigation />
-
-      <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.PADDLE_HOME} component={PaddleHomePage} />
       <Route path={ROUTES.ABOUT} component={AboutPage} />
-      <Route
-        path={ROUTES.AUCTION}
-        render={(props) => (
-          <FirebaseContext.Consumer>
-            {(firebase) => (
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              <AuctionPage {...props} firebase={firebase} />
-            )}
-          </FirebaseContext.Consumer>
+      <FirebaseContext.Consumer>
+        {(firebase) => (
+          <>
+            <Route
+              exact
+              path={ROUTES.LANDING}
+              render={(props) => (
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                <LandingPage {...props} firebase={firebase} />
+              )}
+            />
+            <Route
+              path={ROUTES.AUCTION}
+              render={(props) => (
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                <AuctionPage {...props} firebase={firebase} />
+              )}
+            />
+            <Route
+              path={ROUTES.PADDLE_SESSION}
+              render={(props) => (
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                <PaddleSessionPage {...props} firebase={firebase} />
+              )}
+            />
+          </>
         )}
-      />
-      <Route
-        path={ROUTES.PADDLE_SESSION}
-        render={(props) => (
-          <FirebaseContext.Consumer>
-            {(firebase) => (
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              <PaddleSessionPage {...props} firebase={firebase} />
-            )}
-          </FirebaseContext.Consumer>
-        )}
-      />
+      </FirebaseContext.Consumer>
     </div>
   </Router>
 );

@@ -2,16 +2,17 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
+import './styles/PaddlePledgeIndicatorStyles.css'
+
 function PledgeIndicator({ amount, isSelected }) {
   const dollarAmountText = `$${amount}`;
 
   return (
-    // TODO toggle styles depending on if it is selected
-    <div>
+    <div className="pledge-indicator">
       {
         isSelected
-          ? <b>{dollarAmountText}</b>
-          : <p>{dollarAmountText}</p>
+          ? <div className="pledge-indicator-text-selected"> {dollarAmountText} </div> 
+          : <div className="pledge-indicator-text">  {dollarAmountText} </div> 
       }
     </div>
   );
@@ -35,7 +36,7 @@ function PaddlePledgeIndicator({ pledgeAmounts, currentPledgeAmount }) {
   );
 
   return (
-    <div>
+    <div className="paddle-pledge-indicator">
       {pledgeIndicators}
     </div>
   );

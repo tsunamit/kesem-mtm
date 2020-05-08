@@ -1,0 +1,50 @@
+.paddle-activity-container {
+    flex: 1; 
+    margin-top: 5%;
+    height: 400px;
+    margin-left: 3%;
+    margin-right: 3%;
+    min-width: 200px;
+    max-width: 300px;
+    border: 1px;
+    border-style: solid;
+    border-radius: 15px; 
+    border-color: lightgray;
+}
+
+.paddle-activity-header {
+    height: 40px; 
+    padding: 5px; 
+
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+
+    font-family: Gilroy-Bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.paddle-activity-message-container-extra-wrapper {
+    overflow-y: scroll;
+    display:flex; 
+    flex-direction:column-reverse;
+    height: 350px;
+}
+
+.paddle-activity-message-container { 
+}
+
+.paddle-activity-message {
+    border-top: 1px solid lightgray;
+    line-height: 275%;
+    padding-left: 5%;
+    font-size: 11px;
+    color: gray; 
+}
+
+@media screen and (max-width: 450px) { 
+    .paddle-activity-container {
+        order: 3; 
+    }
+}
