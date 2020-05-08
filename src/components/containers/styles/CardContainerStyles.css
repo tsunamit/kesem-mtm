@@ -1,5 +1,4 @@
 #card-container {
-  margin-top: 5%; 
   font-family: Gilroy-Regular;
   background-color: white;
   padding: 4%;
@@ -28,6 +27,13 @@
   padding-bottom: 3%;
 }
 
+#card-container-fine-text-first {
+  color: #808080; 
+  padding-top: 3%; 
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+
 #card-container-fine-text {
   color: #808080; 
   padding-top: 3%; 
@@ -37,8 +43,8 @@
 }
 
 @media screen and (max-width: 450px) {
-
   #card-container {
     padding: 8%; 
+    margin-top: 5%;
   }
 }

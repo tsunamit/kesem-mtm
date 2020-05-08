@@ -3,7 +3,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 
 import PropTypes from 'prop-types';
-import './styles/PaddlePledgeContainerStyles.css'
+import './styles/PaddlePledgeContainerStyles.css';
 
 import RoundedButton from '../input/RoundedButton';
 
@@ -34,7 +34,6 @@ function PaddlePledgeContainer({ firebase, user, currentPledgeAmount, sessionId 
             </button>
           </div>
         );
-        
       }, 
     });
   };
@@ -59,8 +58,6 @@ function PaddlePledgeContainer({ firebase, user, currentPledgeAmount, sessionId 
               <br></br>
               <br></br>
               If you would like to be contacted at a different email, please email us at ucla.mtm@campkesem.org. </p>
-            
-
           </div>
         );
       }

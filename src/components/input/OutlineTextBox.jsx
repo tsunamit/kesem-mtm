@@ -2,17 +2,25 @@ import React from 'react';
 
 import './styles/OutlineTextBoxStyles.css';
 
-import PropTypes from 'prop-types';
+import PropTypes, { bool } from 'prop-types';
 
-function OutlineTextBox({ placeholder, value, onChangeText }) {
+function OutlineTextBox({ placeholder, value, onChangeText, toUpperCase }) {
   const handleChangeText = (event) => {
     const text = event.target.value;
-    onChangeText(text);
+    if (toUpperCase) {
+      onChangeText(toUpper(text));
+    } else {
+      onChangeText(text);
+    }
+  };
+
+  const toUpper = (textInput) => {
+    return textInput.toUpperCase(); 
   };
 
   return (
-    <div id= 'outline-box'>
-      <input id = 'outline-text'
+    <div className="outline-box">
+      <input className="outline-text"
         type="text"
         value={value}
         placeholder={placeholder}
@@ -25,12 +33,14 @@ function OutlineTextBox({ placeholder, value, onChangeText }) {
 OutlineTextBox.defaultProps = {
   placeholder: 'Enter text here',
   value: '',
+  toUpperCase: false, 
 };
 
 OutlineTextBox.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string,
   onChangeText: PropTypes.func.isRequired,
+  toUpperCase: bool, 
 };
 
 export default OutlineTextBox;

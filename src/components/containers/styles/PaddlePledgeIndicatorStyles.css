@@ -1,20 +1,19 @@
 .paddle-pledge-indicator {
+    flex: 1; 
     padding-top: 5%;
-    width: 95%;
-    display: flex; 
-    justify-content: space-evenly;
+    padding-bottom: 5%;
     padding-left: 2.5%;
     padding-right: 2.5%;
+    display: flex; 
+    justify-content: space-evenly;
     flex-wrap: wrap;
     align-items: center;
 }
 
 .pledge-indicator {
-    border: 1px; 
-    border-style: solid;
     border-radius: 15px;
     border: none;
-    box-shadow: 0px 5px 20px #EDEBEB;
+    width: 100%; 
     min-width: 70px;
     height: 40px;
     align-items: center;
@@ -23,19 +22,19 @@
 }
 
 .pledge-indicator-text {
-
+    font-family: Gilroy-Bold;
 }
 
 .pledge-indicator-text-selected {
     font-family: Gilroy-Bold;
-    font-size: 18px;
-    color: #0091BA;
+    font-size: 28px;
+    color: #06B085;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 501px) {
 
     .paddle-pledge-indicator {
-        order: 3; 
+        order: 4; 
     }
 
   }

@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 
 import './styles/PaddleActivityContainerStyles.css'; 
 
-const paddleLogMessage = (screenName, amountPledged) => (
-  `${screenName} just raised for ${amountPledged}`
+const paddleRaisedMessage = (screenName, amountPledged) => (
+  `${screenName} just raised for $${amountPledged}!`
 );
+
+const paddleRaiseMessageInsert = " just raised for ";
 
 function PaddleActivityContainer({ sessionPaddles }) {
   const totalPaddlesRaised = sessionPaddles.length;
@@ -14,13 +16,15 @@ function PaddleActivityContainer({ sessionPaddles }) {
   return (
     <div className="paddle-activity-container">
       <div className="paddle-activity-header">
-        {totalPaddlesRaised}  paddles raised
+        {totalPaddlesRaised} total paddles raised!
       </div>
       <div className="paddle-activity-message-container-extra-wrapper">
         <div className="paddle-activity-message-container">
           {sessionPaddles.map((paddle) => (
             <div className="paddle-activity-message" key={paddle.screenName + paddle.amountPledged.toString()}>
-              {paddleLogMessage(paddle.screenName, paddle.amountPledged)}
+              <b>{paddle.screenName} </b>
+              {paddleRaiseMessageInsert}
+              <b>${paddle.amountPledged}</b>!
             </div>
           ))}
         </div>

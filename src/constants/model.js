@@ -3,6 +3,7 @@ export const sessionData = {
   donationGoal: 'donationGoal',
   donationTotal: 'donationTotal',
   pledgeAmountSelections: 'pledgeAmountSelections',
+  paddleIdCounter: 'paddleIdCounter',
 };
 
 export const paddle = {

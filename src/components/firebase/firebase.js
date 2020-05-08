@@ -87,10 +87,34 @@ class Firebase {
   }
 
   /**
-   * 
+   * Create a subscription to paddle feed
    */
   subscribeToPaddles = async (sessionId, onUpdate) => {
     return this.orderedPaddlesCollection(sessionId).onSnapshot(querySnapshot => onUpdate(querySnapshot));
+  }
+
+  /**
+   * Atomically read the current paddle counter and assign this to ourself.
+   * Then increment the counter so the next person who reads will have a
+   * unique, higher number
+   */
+  getUniquePaddleId = async (sessionId) => {
+    const atomicIncrementPaddleId = firebase.firestore.FieldValue.increment(1);
+    const sessionDocReference = this.sessionDocReference(sessionId);
+
+    let uniquePaddleId;
+
+    const atomicUniquePaddleTransaction = await this.firestore.runTransaction(async t => {
+      const sessionDocResult = await t.get(sessionDocReference);
+
+      uniquePaddleId = sessionDocResult.data()[sessionDataModel.paddleIdCounter];
+
+      await t.update(sessionDocReference, {
+        [sessionDataModel.paddleIdCounter]: atomicIncrementPaddleId,
+      });
+    });
+
+    return uniquePaddleId;
   }
 
   /**

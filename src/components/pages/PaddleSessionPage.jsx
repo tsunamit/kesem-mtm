@@ -88,7 +88,21 @@ function PaddleSessionPage({ firebase, location }) {
       urlVars.sessionId,
       (sessionDocSnapshot) => onSessionUpdate(sessionDocSnapshot),
     );
+
+    // Get screen name if we don't have screen name already
+    if (routerState.screenName === '') {
+      console.log('generating screen name');
+      firebase.getUniquePaddleId(urlVars.sessionId)
+        .then((uniquePaddleId) => {
+          setUser((prevUserState) => ({
+            name: prevUserState.name,
+            email: prevUserState.email,
+            screenName: `Paddle #${uniquePaddleId}`,
+          }));
+        });
+    }
   }, []);
+
 
   return (
     <div>
@@ -102,18 +116,20 @@ function PaddleSessionPage({ firebase, location }) {
               />
               <div className="main-area-container"> 
                 <div className="sponsor-info-container"> 
-                  <div className="sponsor-info-text-img-container"> 
+                  <div className="sponsor-info-img-text-container">
                     <img className="sponsor-info-img" src={img_1}> 
                     </img> 
+
                     <div className="sponsor-info-text"> 
                       <h1>Big Hill Sponsor</h1>
                       <p>Provide Supplies For Virtual Camp</p>
                     </div>
                   </div>
+                 
                   <PaddlePledgeIndicator
-                      pledgeAmounts={sessionData.pledgeAmountSelections}
-                      currentPledgeAmount={sessionData.currentPledgeAmount}
-                    />
+                    pledgeAmounts={sessionData.pledgeAmountSelections}
+                    currentPledgeAmount={sessionData.currentPledgeAmount}
+                  />
                 </div>
                 <PaddleActivityContainer
                   sessionPaddles={sessionPaddles}
