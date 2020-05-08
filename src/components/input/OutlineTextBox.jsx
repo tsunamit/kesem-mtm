@@ -24,6 +24,7 @@ function OutlineTextBox({ placeholder, value, onChangeText, toUpperCase }) {
         type="text"
         value={value}
         placeholder={placeholder}
+        spellCheck={false}
         onChange={(event) => handleChangeText(event)}
       />
     </div>
