@@ -57,6 +57,7 @@ function PaddleSessionPage({ firebase, location }) {
     pledgeAmountSelections: [],
   });
   const [sessionPaddles, setSessionPaddles] = useState([]);
+  const [numberOfPaddlesInSession, setNumberOfPaddlesInSession] = useState(0);
   const [sponsorTitle, setSponsorTitle] = useState('');
   const [sponsorDescription, setSponsorDescription] = useState('');
   const [backgroundImage, setBackgroundImage] = useState(backgroundImage2500);
@@ -96,6 +97,16 @@ function PaddleSessionPage({ firebase, location }) {
       },
     );
   };
+
+  const subscribeToNumberPaddlesInSession = () => {
+    firebase.subscribeToNumberOfPaddlesInSession(
+      sessionId,
+      (querySnapshot) => {
+        console.log('got the number of paddles in session: ', querySnapshot.docs.length)
+        setNumberOfPaddlesInSession(querySnapshot.docs.length);
+      }
+    );
+  }
 
   /**
    * On update current pledge amount.
@@ -157,6 +168,7 @@ function PaddleSessionPage({ firebase, location }) {
   useEffect(() => {
     if (sessionIsValid) {
       subscribeToPaddles();
+      subscribeToNumberPaddlesInSession();
     }
   }, [sessionIsValid]);
 
@@ -242,6 +254,7 @@ function PaddleSessionPage({ firebase, location }) {
                   sessionId={sessionId}
                   user={user}
                   currentPledgeAmount={sessionData.currentPledgeAmount}
+                  numberOfPaddlesInSession={numberOfPaddlesInSession}
                 />
               </div> 
               <FooterContainer> 
