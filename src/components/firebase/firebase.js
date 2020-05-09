@@ -6,7 +6,6 @@ import {
   sessionData as sessionDataModel,
   AUCTION,
   paddleDataModel,
-  paddleSessionTypes,
 } from '../../constants/model';
 
 const config = {
@@ -62,6 +61,13 @@ class Firebase {
   );
 
   /**
+   * Get a reference to the joinees collection for a particular session
+   */
+  joineesCollection = (sessionId) => (
+    this.firestore.collection(`sessions/${sessionId}/joinees`)
+  )
+
+  /**
    * Get paddles collection ordered list based on creation time
    */
   orderedPaddlesCollection = (sessionId) => (
@@ -77,7 +83,6 @@ class Firebase {
 
     // add paddle to the list of paddles raised
     this.paddlesCollection(sessionId).add({
-      [paddleDataModel.type]: paddleSessionTypes.paddle,
       [paddleDataModel.name]: name,
       [paddleDataModel.screenName]: screenName,
       [paddleDataModel.email]: email,
@@ -99,26 +104,10 @@ class Firebase {
     const joinedAt = firebase.firestore.FieldValue.serverTimestamp();
 
     // add paddle to the list of paddles raised
-    this.paddlesCollection(sessionId).add({
-      [paddleDataModel.type]: paddleSessionTypes.joinNotification,
+    this.joineesCollection(sessionId).add({
       [paddleDataModel.screenName]: screenName,
       [paddleDataModel.email]: email,
       [paddleDataModel.createdAt]: joinedAt,
-    });
-  }
-
-  /**
-   * Add left paddle session notification to paddles collection
-   */
-  addLeftSessionNotification = async (screenName, email, sessionId) => {
-    const leftSessionAt = firebase.firestore.FieldValue.serverTimestamp();
-
-    // add paddle to the list of paddles raised
-    this.paddlesCollection(sessionId).add({
-      [paddleDataModel.type]: paddleSessionTypes.leftNotification,
-      [paddleDataModel.screenName]: screenName,
-      [paddleDataModel.email]: email,
-      [paddleDataModel.createdAt]: leftSessionAt,
     });
   }
 

@@ -10,8 +10,6 @@ import PaddlePledgeIndicator from '../containers/PaddlePledgeIndicator';
 import DonationProgressBar from '../containers/DonationProgressBar';
 import FooterContainer from '../containers/FooterContainer';
 
-import { paddleSessionTypes } from '../../constants/model';
-
 import './styles/PaddleSessionPageStyles.css';
 
 // TODO Taylor: choose which images to display for what value
