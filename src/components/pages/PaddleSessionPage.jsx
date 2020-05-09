@@ -83,7 +83,15 @@ function PaddleSessionPage({ firebase, location }) {
       sessionId,
       (querySnapshot) => {
         setSessionPaddles(
-          querySnapshot.docs.map((doc) => doc.data()),
+          querySnapshot.docs.map((doc) => {
+            const docData = doc.data();
+
+            // Use spread operator below so we can include the doc ID
+            return {
+              id: doc.id,
+              ...docData,
+            };
+          }),
         );
       },
     );
@@ -186,7 +194,7 @@ function PaddleSessionPage({ firebase, location }) {
     // Get screen name if we don't have screen name already
     if (routerState.screenName === '') {
       console.log('generating screen name');
-      firebase.getUniquePaddleId(urlVars.sessionId)
+      firebase.getUniqueJoineeId(urlVars.sessionId)
         .then((uniquePaddleId) => {
           setUser((prevUserState) => ({
             name: prevUserState.name,
@@ -227,7 +235,7 @@ function PaddleSessionPage({ firebase, location }) {
                 </div>
                 <PaddleActivityContainer
                   sessionPaddles={sessionPaddles}
-                  user={user}
+                  sessionId={sessionId}
                 />
                 <PaddlePledgeContainer
                   firebase={firebase}

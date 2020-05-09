@@ -11,6 +11,7 @@ export const paddleDataModel = {
   screenName: 'screenName',
   email: 'email',
   amountPledged: 'amountPledged',
+  hearts: 'hearts',
   createdAt: 'createdAt',
 };
 

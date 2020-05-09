@@ -87,6 +87,7 @@ class Firebase {
       [paddleDataModel.screenName]: screenName,
       [paddleDataModel.email]: email,
       [paddleDataModel.amountPledged]: amountPledged,
+      [paddleDataModel.hearts]: 0,
       [paddleDataModel.createdAt]: createdAt,
     });
 
@@ -96,6 +97,28 @@ class Firebase {
       [sessionDataModel.donationTotal]: atomicIncrement
     });
   }
+
+  likeUnlikePaddleRaise = async (paddleRaiseDocId, sessionId, incrementValue) => {
+    const atomicIncrement = firebase.firestore.FieldValue.increment(incrementValue);
+    return this.firestore.doc(`sessions/${sessionId}/paddles/${paddleRaiseDocId}`).update({
+      hearts: atomicIncrement,
+    });
+  }
+
+  /**
+   * Send a like to a specific paddle raised
+   */
+  likePaddleRaise = async (paddleRaiseDocId, sessionId) => {
+    this.likeUnlikePaddleRaise(paddleRaiseDocId, sessionId, 1)
+  }
+
+  /**
+   * Send a like to a specific paddle raised
+   */
+  unlikePaddleRaise = async (paddleRaiseDocId, sessionId) => {
+    this.likeUnlikePaddleRaise(paddleRaiseDocId, sessionId, -1)
+  }
+
 
   /**
    * Add join notification to paddles collection
@@ -123,7 +146,7 @@ class Firebase {
    * Then increment the counter so the next person who reads will have a
    * unique, higher number
    */
-  getUniquePaddleId = async (sessionId) => {
+  getUniqueJoineeId = async (sessionId) => {
     const atomicIncrementPaddleId = firebase.firestore.FieldValue.increment(1);
     const sessionDocReference = this.sessionDocReference(sessionId);
 
