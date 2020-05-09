@@ -10,11 +10,32 @@ import PaddlePledgeIndicator from '../containers/PaddlePledgeIndicator';
 import DonationProgressBar from '../containers/DonationProgressBar';
 import FooterContainer from '../containers/FooterContainer';
 
-import { paddleSessionTypes } from '../../constants/model';
+import './styles/PaddleSessionPageStyles.css';
 
-import img_1 from '../../images/kesem-2.jpg'
+// TODO Taylor: choose which images to display for what value
+import backgroundImage2500 from '../../images/sponsor-slide-1.jpg';
+import backgroundImage1000 from '../../images/sponsor-slide-2.jpg';
+import backgroundImage500 from '../../images/sponsor-slide-3.jpg';
+import backgroundImage250 from '../../images/sponsor-slide-4.jpg';
+import backgroundImage100 from '../../images/sponsor-slide-5.jpg';
+import backgroundImage50 from '../../images/sponsor-slide-6.jpg';
+import backgroundImage20 from '../../images/sponsor-slide-7.jpg';
 
-import './styles/PaddleSessionPageStyles.css'
+// TODO Taylor: change sponsor title and descriptions for each value
+const SPONSOR_TITLE_2500 = 'Virtual Camp Sponsor';
+const SPONSOR_DESCRIPTION_2500 = 'Provide Supplies For Virtual Camp';
+const SPONSOR_TITLE_1000 = 'Friends & Family Day Sponsor';
+const SPONSOR_DESCRIPTION_1000 = 'Support our Friends and Family Days!';
+const SPONSOR_TITLE_500 = 'Kesem Swag Sponsor';
+const SPONSOR_DESCRIPTION_500 = 'Provide Camp Kesem T-shirts for all of our campers!';
+const SPONSOR_TITLE_250 = 'Warm Welcomes Sponsor';
+const SPONSOR_DESCRIPTION_250 = 'Welcome our campers into the Camp Kesem family! ';
+const SPONSOR_TITLE_100 = 'Celebration Sponsor';
+const SPONSOR_DESCRIPTION_100 = 'Celebrate our campers’ birthdays (skip around the room)! ';
+const SPONSOR_TITLE_50 = 'Friendship Sponsor';
+const SPONSOR_DESCRIPTION_50 = 'Sponsor material for friendship bracelets!';
+const SPONSOR_TITLE_20 = 'Shine On Sponsor';
+const SPONSOR_DESCRIPTION_20 = 'Support Camp Kesem to shine on for 20 more years!';
 
 function PaddleSessionPage({ firebase, location }) {
   // use router history to access passes state
@@ -36,6 +57,10 @@ function PaddleSessionPage({ firebase, location }) {
     pledgeAmountSelections: [],
   });
   const [sessionPaddles, setSessionPaddles] = useState([]);
+  const [numberOfPaddlesInSession, setNumberOfPaddlesInSession] = useState(0);
+  const [sponsorTitle, setSponsorTitle] = useState('');
+  const [sponsorDescription, setSponsorDescription] = useState('');
+  const [backgroundImage, setBackgroundImage] = useState(backgroundImage2500);
 
   const onSessionUpdate = (sessionDocSnapshot) => {
     if (sessionDocSnapshot.exists) {
@@ -59,18 +84,91 @@ function PaddleSessionPage({ firebase, location }) {
       sessionId,
       (querySnapshot) => {
         setSessionPaddles(
-          querySnapshot.docs.map((doc) => doc.data()),
+          querySnapshot.docs.map((doc) => {
+            const docData = doc.data();
+
+            // Use spread operator below so we can include the doc ID
+            return {
+              id: doc.id,
+              ...docData,
+            };
+          }),
         );
       },
     );
   };
 
+  const subscribeToNumberPaddlesInSession = () => {
+    firebase.subscribeToNumberOfPaddlesInSession(
+      sessionId,
+      (querySnapshot) => {
+        console.log('got the number of paddles in session: ', querySnapshot.docs.length)
+        setNumberOfPaddlesInSession(querySnapshot.docs.length);
+      }
+    );
+  }
+
   /**
-   * execute when session is validated
+   * On update current pledge amount.
+   * Change the image and the sponsor text.
+   */
+  useEffect(() => {
+    switch (sessionData.currentPledgeAmount) {
+      case 2500: {
+        setSponsorTitle(SPONSOR_TITLE_2500);
+        setSponsorDescription(SPONSOR_DESCRIPTION_2500);
+        setBackgroundImage(backgroundImage2500);
+        break;
+      }
+      case 1000: {
+        setSponsorTitle(SPONSOR_TITLE_1000);
+        setSponsorDescription(SPONSOR_DESCRIPTION_1000);
+        setBackgroundImage(backgroundImage1000);
+        break;
+      }
+      case 500: {
+        setSponsorTitle(SPONSOR_TITLE_500);
+        setSponsorDescription(SPONSOR_DESCRIPTION_500);
+        setBackgroundImage(backgroundImage500);
+        break;
+      }
+      case 250: {
+        setSponsorTitle(SPONSOR_TITLE_250);
+        setSponsorDescription(SPONSOR_DESCRIPTION_250);
+        setBackgroundImage(backgroundImage250);
+        break;
+      }
+      case 100: {
+        setSponsorTitle(SPONSOR_TITLE_100);
+        setSponsorDescription(SPONSOR_DESCRIPTION_100);
+        setBackgroundImage(backgroundImage100);
+        break;
+      }
+      case 50: {
+        setSponsorTitle(SPONSOR_TITLE_50);
+        setSponsorDescription(SPONSOR_DESCRIPTION_50);
+        setBackgroundImage(backgroundImage50);
+        break;
+      }
+      case 20: {
+        setSponsorTitle(SPONSOR_TITLE_20);
+        setSponsorDescription(SPONSOR_DESCRIPTION_20);
+        setBackgroundImage(backgroundImage20);
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  }, [sessionData.currentPledgeAmount]);
+
+  /**
+   * on session validated
    */
   useEffect(() => {
     if (sessionIsValid) {
       subscribeToPaddles();
+      subscribeToNumberPaddlesInSession();
     }
   }, [sessionIsValid]);
 
@@ -108,7 +206,7 @@ function PaddleSessionPage({ firebase, location }) {
     // Get screen name if we don't have screen name already
     if (routerState.screenName === '') {
       console.log('generating screen name');
-      firebase.getUniquePaddleId(urlVars.sessionId)
+      firebase.getUniqueJoineeId(urlVars.sessionId)
         .then((uniquePaddleId) => {
           setUser((prevUserState) => ({
             name: prevUserState.name,
@@ -133,12 +231,12 @@ function PaddleSessionPage({ firebase, location }) {
               <div className="main-area-container"> 
                 <div className="sponsor-info-container"> 
                   <div className="sponsor-info-img-text-container">
-                    <img className="sponsor-info-img" src={img_1}> 
+                    <img className="sponsor-info-img" src={backgroundImage}> 
                     </img> 
 
                     <div className="sponsor-info-text"> 
-                      <h1>Big Hill Sponsor</h1>
-                      <p>Provide Supplies For Virtual Camp</p>
+                      <h1>{sponsorTitle}</h1>
+                      <p>{sponsorDescription}</p>
                     </div>
                   </div>
                  
@@ -149,13 +247,14 @@ function PaddleSessionPage({ firebase, location }) {
                 </div>
                 <PaddleActivityContainer
                   sessionPaddles={sessionPaddles}
-                  user={user}
+                  sessionId={sessionId}
                 />
                 <PaddlePledgeContainer
                   firebase={firebase}
                   sessionId={sessionId}
                   user={user}
                   currentPledgeAmount={sessionData.currentPledgeAmount}
+                  numberOfPaddlesInSession={numberOfPaddlesInSession}
                 />
               </div> 
               <FooterContainer> 

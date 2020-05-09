@@ -1,53 +1,60 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { paddleSessionTypes, paddleDataModel } from '../../constants/model';
+import FirebaseContext from '../firebase/context';
 
-import './styles/PaddleActivityContainerStyles.css'; 
+import { paddleDataModel } from '../../constants/model';
 
+import './styles/PaddleActivityContainerStyles.css';
+import Firebase from '../firebase/firebase';
+import heart_thin from '../../images/heart-thin.png'
+import heart_thick from '../../images/heart-thick.png'
 const paddleRaisedMessage = (screenName, amountPledged) => (
   `${screenName} just raised for $${amountPledged}!`
 );
 
-const paddleRaiseMessageInsert = " just raised for ";
+const paddleRaiseMessageInsert = " just raised for  ";
 const JOINED_PADDLE_RAISE_MESSAGE = ' joined the paddle raise';
 
-function PaddleActivityContainer({ sessionPaddles }) {
-  const totalPaddlesRaised = sessionPaddles.length;
+function PaddleActivityItem({
+  paddleId, screenName, amountPledged,
+  hearts, firebase, sessionId
+}) {
+  const [userDidLike, setUserDidLike] = useState(false);
+  const [heartImg, setHeartImg] = useState(heart_thin);
 
-  const mapActivityToComponents = () => {
-    return sessionPaddles.map((paddleActivityItem) => {
-      // For some reason, a newly created item has no timestamp initially. So we
-      // need to give it the maximum number to preserve correct ordering
-      const componentKey = (paddleActivityItem[paddleDataModel.createdAt]) == null
-        ? Number.MAX_SAFE_INTEGER
-        : paddleActivityItem[paddleDataModel.createdAt].seconds;
-
-      switch (paddleActivityItem.type) {
-        // Paddle raised message
-        case paddleSessionTypes.paddle: {
-          return (
-            <div className="paddle-activity-message" key={componentKey}>
-              <b>{paddleActivityItem[paddleDataModel.screenName]}</b>
-              {paddleRaiseMessageInsert}
-              <b>${paddleActivityItem[paddleDataModel.amountPledged]}</b>
-            </div>
-          );
-        }
-        // Someone joined the paddle raise
-        case paddleSessionTypes.joinNotification: {
-          return (
-            <div className="paddle-activity-message" key={componentKey}>
-              <b>{paddleActivityItem[paddleDataModel.screenName]}</b>
-              {JOINED_PADDLE_RAISE_MESSAGE}
-            </div>
-          );
-        }
-        default:
-          break;
-      }
-    });
+  const onPressLike = async () => {
+    if (userDidLike) {
+      await firebase.unlikePaddleRaise(paddleId, sessionId);
+      setHeartImg(heart_thin);
+      setUserDidLike(false);
+    } else {
+      await firebase.likePaddleRaise(paddleId, sessionId);
+      setHeartImg(heart_thick);
+      setUserDidLike(true);
+    }
   };
+
+
+  return (
+    <div className="paddle-activity-message" key={paddleId}>
+      <div className="text-first-part"> 
+        <b>{screenName} </b>
+        {paddleRaiseMessageInsert}
+        <b>${amountPledged}!</b>
+      </div>
+      <div className="heart-icon-container">
+        <div className="heart-icon-counter">
+          {`${hearts}`}
+        </div>
+        <input className="heart-icon-img" type="image" src={heartImg} onClick={() => onPressLike()}/>
+      </div>
+    </div>
+  );
+}
+
+function PaddleActivityContainer({ sessionPaddles, sessionId }) {
+  const totalPaddlesRaised = sessionPaddles.length;
 
   return (
     <div className="paddle-activity-container">
@@ -56,14 +63,20 @@ function PaddleActivityContainer({ sessionPaddles }) {
       </div>
       <div className="paddle-activity-message-container-extra-wrapper">
         <div className="paddle-activity-message-container">
-          {mapActivityToComponents()}
-          {/* {sessionPaddles.map((paddle) => (
-            <div className="paddle-activity-message" key={paddle.screenName + paddle.amountPledged.toString()}>
-              <b>{paddle.screenName} </b>
-              {paddleRaiseMessageInsert}
-              <b>${paddle.amountPledged}</b>!
-            </div>
-          ))} */}
+          {sessionPaddles.map((paddle) => (
+            <FirebaseContext.Consumer>
+              {(firebase) => (
+                <PaddleActivityItem
+                  paddleId={paddle.id}
+                  screenName={paddle[paddleDataModel.screenName]}
+                  amountPledged={paddle[paddleDataModel.amountPledged]}
+                  hearts={paddle[paddleDataModel.hearts]}
+                  firebase={firebase}
+                  sessionId={sessionId}
+                />
+              )}
+            </FirebaseContext.Consumer>
+          ))}
         </div>
       </div>
     </div>
@@ -71,23 +84,19 @@ function PaddleActivityContainer({ sessionPaddles }) {
 }
 
 PaddleActivityContainer.propTypes = {
-  // sessionPaddles: PropTypes.arrayOf(
-  //   PropTypes.shape({
-  //     name: PropTypes.string.isRequired,
-  //     screenName: PropTypes.string.isRequired,
-  //     email: PropTypes.string.isRequired,
-  //     amountPledged: PropTypes.number.isRequired,
-  //     createdAt: PropTypes.shape({
-  //       nanoseconds: PropTypes.number.isRequired,
-  //       seconds: PropTypes.number.isRequired,
-  //     }).isRequired,
-  //   }).isRequired,
-  // ).isRequired,
-  user: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    screenName: PropTypes.string.isRequired,
-  }).isRequired,
+  sessionPaddles: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      screenName: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+      amountPledged: PropTypes.number.isRequired,
+      hearts: PropTypes.number.isRequired,
+      createdAt: PropTypes.shape({
+        nanoseconds: PropTypes.number.isRequired,
+        seconds: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+  ).isRequired,
 };
 
 export default PaddleActivityContainer;
