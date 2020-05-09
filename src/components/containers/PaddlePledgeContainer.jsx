@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
+import Confetti from 'react-confetti'; 
 
 import PropTypes from 'prop-types';
 import './styles/PaddlePledgeContainerStyles.css';
@@ -43,6 +44,7 @@ function PaddlePledgeContainer({ firebase, user, currentPledgeAmount, numberOfPa
       customUI: ({ onClose }) => {
         return (
           <div className='confirmation-custom-ui'>
+            <Confetti> </Confetti>
             <button className = "confirmation-custom-ui-close-button"  onClick={onClose}>
               x
             </button>
@@ -66,8 +68,10 @@ function PaddlePledgeContainer({ firebase, user, currentPledgeAmount, numberOfPa
 
   return ( 
     <div className='paddle-pledge-container'>
-      <p>Number of paddles in room: {numberOfPaddlesInSession}</p>
-      <div className='paddle-pledge-container-p'>Screen Name: <br></br> <b> {user.screenName} </b></div>
+      <div className='paddle-pledge-container-num-paddles'> 
+        <b> {numberOfPaddlesInSession} </b>people in the room
+      </div> 
+      <div className='paddle-pledge-container-p'>Your Screen Name: <br></br> <b> {user.screenName} </b></div>
       <div className='paddle-pledge-container-h2'>Pledge to give</div>
       <div className='paddle-pledge-container-h1'>${currentPledgeAmount}</div>
       <div className= "paddle-pledge-button-wrapper"> 
