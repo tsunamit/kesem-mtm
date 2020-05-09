@@ -6,7 +6,6 @@ import {
   sessionData as sessionDataModel,
   AUCTION,
   paddleDataModel,
-  paddleSessionTypes,
 } from '../../constants/model';
 
 const config = {
@@ -62,6 +61,13 @@ class Firebase {
   );
 
   /**
+   * Get a reference to the joinees collection for a particular session
+   */
+  joineesCollection = (sessionId) => (
+    this.firestore.collection(`sessions/${sessionId}/joinees`)
+  )
+
+  /**
    * Get paddles collection ordered list based on creation time
    */
   orderedPaddlesCollection = (sessionId) => (
@@ -77,11 +83,11 @@ class Firebase {
 
     // add paddle to the list of paddles raised
     this.paddlesCollection(sessionId).add({
-      [paddleDataModel.type]: paddleSessionTypes.paddle,
       [paddleDataModel.name]: name,
       [paddleDataModel.screenName]: screenName,
       [paddleDataModel.email]: email,
       [paddleDataModel.amountPledged]: amountPledged,
+      [paddleDataModel.hearts]: 0,
       [paddleDataModel.createdAt]: createdAt,
     });
 
@@ -92,6 +98,28 @@ class Firebase {
     });
   }
 
+  likeUnlikePaddleRaise = async (paddleRaiseDocId, sessionId, incrementValue) => {
+    const atomicIncrement = firebase.firestore.FieldValue.increment(incrementValue);
+    return this.firestore.doc(`sessions/${sessionId}/paddles/${paddleRaiseDocId}`).update({
+      hearts: atomicIncrement,
+    });
+  }
+
+  /**
+   * Send a like to a specific paddle raised
+   */
+  likePaddleRaise = async (paddleRaiseDocId, sessionId) => {
+    this.likeUnlikePaddleRaise(paddleRaiseDocId, sessionId, 1)
+  }
+
+  /**
+   * Send a like to a specific paddle raised
+   */
+  unlikePaddleRaise = async (paddleRaiseDocId, sessionId) => {
+    this.likeUnlikePaddleRaise(paddleRaiseDocId, sessionId, -1)
+  }
+
+
   /**
    * Add join notification to paddles collection
    */
@@ -99,26 +127,10 @@ class Firebase {
     const joinedAt = firebase.firestore.FieldValue.serverTimestamp();
 
     // add paddle to the list of paddles raised
-    this.paddlesCollection(sessionId).add({
-      [paddleDataModel.type]: paddleSessionTypes.joinNotification,
+    this.joineesCollection(sessionId).add({
       [paddleDataModel.screenName]: screenName,
       [paddleDataModel.email]: email,
       [paddleDataModel.createdAt]: joinedAt,
-    });
-  }
-
-  /**
-   * Add left paddle session notification to paddles collection
-   */
-  addLeftSessionNotification = async (screenName, email, sessionId) => {
-    const leftSessionAt = firebase.firestore.FieldValue.serverTimestamp();
-
-    // add paddle to the list of paddles raised
-    this.paddlesCollection(sessionId).add({
-      [paddleDataModel.type]: paddleSessionTypes.leftNotification,
-      [paddleDataModel.screenName]: screenName,
-      [paddleDataModel.email]: email,
-      [paddleDataModel.createdAt]: leftSessionAt,
     });
   }
 
@@ -134,7 +146,7 @@ class Firebase {
    * Then increment the counter so the next person who reads will have a
    * unique, higher number
    */
-  getUniquePaddleId = async (sessionId) => {
+  getUniqueJoineeId = async (sessionId) => {
     const atomicIncrementPaddleId = firebase.firestore.FieldValue.increment(1);
     const sessionDocReference = this.sessionDocReference(sessionId);
 
