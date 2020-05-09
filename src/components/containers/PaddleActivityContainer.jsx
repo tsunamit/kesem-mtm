@@ -21,24 +21,20 @@ function PaddleActivityItem({
   hearts, firebase, sessionId
 }) {
   const [userDidLike, setUserDidLike] = useState(false);
+  const [heartImg, setHeartImg] = useState(heart_thin);
 
   const onPressLike = async () => {
     if (userDidLike) {
-      // unlike
       await firebase.unlikePaddleRaise(paddleId, sessionId);
-      toggleImage();
+      setHeartImg(heart_thin);
       setUserDidLike(false);
     } else {
       await firebase.likePaddleRaise(paddleId, sessionId);
-      toggleImage();
+      setHeartImg(heart_thick);
       setUserDidLike(true);
     }
   };
-  //TO DO: I can't get the image to toggle. Ryan, can you try in the morning? I'm stumped haha. 
-  const toggleImage = () => {
-    let imgElement = document.getElementsByClassName("heart-icon-img"); 
-    imgElement.src = (imgElement.src === heart_thin)? heart_thick : heart_thin;
-  }; 
+
 
   return (
     <div className="paddle-activity-message" key={paddleId}>
@@ -51,7 +47,7 @@ function PaddleActivityItem({
         <div className="heart-icon-counter">
           {`${hearts}`}
         </div>
-        <input className="heart-icon-img" type="image" src={heart_thin} onClick={() => onPressLike()}/>
+        <input className="heart-icon-img" type="image" src={heartImg} onClick={() => onPressLike()}/>
       </div>
     </div>
   );
