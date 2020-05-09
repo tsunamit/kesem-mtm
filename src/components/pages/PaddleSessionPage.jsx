@@ -12,9 +12,32 @@ import FooterContainer from '../containers/FooterContainer';
 
 import { paddleSessionTypes } from '../../constants/model';
 
-import img_1 from '../../images/kesem-2.jpg'
+import './styles/PaddleSessionPageStyles.css';
 
-import './styles/PaddleSessionPageStyles.css'
+// TODO Taylor: choose which images to display for what value
+import backgroundImage2500 from '../../images/kesem-2.jpg';
+import backgroundImage1000 from '../../images/kesem-3.jpg';
+import backgroundImage500 from '../../images/kesem-4.jpg';
+import backgroundImage250 from '../../images/kesem-5.jpg';
+import backgroundImage100 from '../../images/kesem-6.jpg';
+import backgroundImage50 from '../../images/kesem-7.jpg';
+import backgroundImage20 from '../../images/kesem-9.jpg';
+
+// TODO Taylor: change sponsor title and descriptions for each value
+const SPONSOR_TITLE_2500 = 'Big Hill Sponsor';
+const SPONSOR_DESCRIPTION_2500 = 'Provide Supplies For Virtual Camp';
+const SPONSOR_TITLE_1000 = 'sponsor title';
+const SPONSOR_DESCRIPTION_1000 = 'sponsor description';
+const SPONSOR_TITLE_500 = 'sponsor title';
+const SPONSOR_DESCRIPTION_500 = 'sponsor description';
+const SPONSOR_TITLE_250 = 'sponsor title';
+const SPONSOR_DESCRIPTION_250 = 'sponsor description';
+const SPONSOR_TITLE_100 = 'sponsor title';
+const SPONSOR_DESCRIPTION_100 = 'sponsor description';
+const SPONSOR_TITLE_50 = 'sponsor title';
+const SPONSOR_DESCRIPTION_50 = 'sponsor description';
+const SPONSOR_TITLE_20 = 'sponsor title';
+const SPONSOR_DESCRIPTION_20 = 'sponsor description';
 
 function PaddleSessionPage({ firebase, location }) {
   // use router history to access passes state
@@ -36,6 +59,9 @@ function PaddleSessionPage({ firebase, location }) {
     pledgeAmountSelections: [],
   });
   const [sessionPaddles, setSessionPaddles] = useState([]);
+  const [sponsorTitle, setSponsorTitle] = useState('');
+  const [sponsorDescription, setSponsorDescription] = useState('');
+  const [backgroundImage, setBackgroundImage] = useState(backgroundImage2500);
 
   const onSessionUpdate = (sessionDocSnapshot) => {
     if (sessionDocSnapshot.exists) {
@@ -66,7 +92,61 @@ function PaddleSessionPage({ firebase, location }) {
   };
 
   /**
-   * execute when session is validated
+   * On update current pledge amount.
+   * Change the image and the sponsor text.
+   */
+  useEffect(() => {
+    switch (sessionData.currentPledgeAmount) {
+      case 2500: {
+        setSponsorTitle(SPONSOR_TITLE_2500);
+        setSponsorDescription(SPONSOR_DESCRIPTION_2500);
+        setBackgroundImage(backgroundImage2500);
+        break;
+      }
+      case 1000: {
+        setSponsorTitle(SPONSOR_TITLE_1000);
+        setSponsorDescription(SPONSOR_DESCRIPTION_1000);
+        setBackgroundImage(backgroundImage1000);
+        break;
+      }
+      case 500: {
+        setSponsorTitle(SPONSOR_TITLE_500);
+        setSponsorDescription(SPONSOR_DESCRIPTION_500);
+        setBackgroundImage(backgroundImage500);
+        break;
+      }
+      case 250: {
+        setSponsorTitle(SPONSOR_TITLE_250);
+        setSponsorDescription(SPONSOR_DESCRIPTION_250);
+        setBackgroundImage(backgroundImage250);
+        break;
+      }
+      case 100: {
+        setSponsorTitle(SPONSOR_TITLE_100);
+        setSponsorDescription(SPONSOR_DESCRIPTION_100);
+        setBackgroundImage(backgroundImage100);
+        break;
+      }
+      case 50: {
+        setSponsorTitle(SPONSOR_TITLE_50);
+        setSponsorDescription(SPONSOR_DESCRIPTION_50);
+        setBackgroundImage(backgroundImage50);
+        break;
+      }
+      case 20: {
+        setSponsorTitle(SPONSOR_TITLE_20);
+        setSponsorDescription(SPONSOR_DESCRIPTION_20);
+        setBackgroundImage(backgroundImage20);
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  }, [sessionData.currentPledgeAmount]);
+
+  /**
+   * on session validated
    */
   useEffect(() => {
     if (sessionIsValid) {
@@ -133,12 +213,12 @@ function PaddleSessionPage({ firebase, location }) {
               <div className="main-area-container"> 
                 <div className="sponsor-info-container"> 
                   <div className="sponsor-info-img-text-container">
-                    <img className="sponsor-info-img" src={img_1}> 
+                    <img className="sponsor-info-img" src={backgroundImage}> 
                     </img> 
 
                     <div className="sponsor-info-text"> 
-                      <h1>Big Hill Sponsor</h1>
-                      <p>Provide Supplies For Virtual Camp</p>
+                      <h1>{sponsorTitle}</h1>
+                      <p>{sponsorDescription}</p>
                     </div>
                   </div>
                  
