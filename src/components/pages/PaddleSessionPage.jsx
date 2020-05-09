@@ -13,29 +13,29 @@ import FooterContainer from '../containers/FooterContainer';
 import './styles/PaddleSessionPageStyles.css';
 
 // TODO Taylor: choose which images to display for what value
-import backgroundImage2500 from '../../images/kesem-2.jpg';
-import backgroundImage1000 from '../../images/kesem-3.jpg';
-import backgroundImage500 from '../../images/kesem-4.jpg';
-import backgroundImage250 from '../../images/kesem-5.jpg';
-import backgroundImage100 from '../../images/kesem-6.jpg';
-import backgroundImage50 from '../../images/kesem-7.jpg';
-import backgroundImage20 from '../../images/kesem-9.jpg';
+import backgroundImage2500 from '../../images/sponsor-slide-1.jpg';
+import backgroundImage1000 from '../../images/sponsor-slide-2.jpg';
+import backgroundImage500 from '../../images/sponsor-slide-3.jpg';
+import backgroundImage250 from '../../images/sponsor-slide-4.jpg';
+import backgroundImage100 from '../../images/sponsor-slide-5.jpg';
+import backgroundImage50 from '../../images/sponsor-slide-6.jpg';
+import backgroundImage20 from '../../images/sponsor-slide-7.jpg';
 
 // TODO Taylor: change sponsor title and descriptions for each value
-const SPONSOR_TITLE_2500 = 'Big Hill Sponsor';
+const SPONSOR_TITLE_2500 = 'Virtual Camp Sponsor';
 const SPONSOR_DESCRIPTION_2500 = 'Provide Supplies For Virtual Camp';
-const SPONSOR_TITLE_1000 = 'sponsor title';
-const SPONSOR_DESCRIPTION_1000 = 'sponsor description';
-const SPONSOR_TITLE_500 = 'sponsor title';
-const SPONSOR_DESCRIPTION_500 = 'sponsor description';
-const SPONSOR_TITLE_250 = 'sponsor title';
-const SPONSOR_DESCRIPTION_250 = 'sponsor description';
-const SPONSOR_TITLE_100 = 'sponsor title';
-const SPONSOR_DESCRIPTION_100 = 'sponsor description';
-const SPONSOR_TITLE_50 = 'sponsor title';
-const SPONSOR_DESCRIPTION_50 = 'sponsor description';
-const SPONSOR_TITLE_20 = 'sponsor title';
-const SPONSOR_DESCRIPTION_20 = 'sponsor description';
+const SPONSOR_TITLE_1000 = 'Friends & Family Day Sponsor';
+const SPONSOR_DESCRIPTION_1000 = 'Support our Friends and Family Days!';
+const SPONSOR_TITLE_500 = 'Kesem Swag Sponsor';
+const SPONSOR_DESCRIPTION_500 = 'Provide Camp Kesem T-shirts for all of our campers!';
+const SPONSOR_TITLE_250 = 'Warm Welcomes Sponsor';
+const SPONSOR_DESCRIPTION_250 = 'Welcome our campers into the Camp Kesem family! ';
+const SPONSOR_TITLE_100 = 'Celebration Sponsor';
+const SPONSOR_DESCRIPTION_100 = 'Celebrate our campers’ birthdays (skip around the room)! ';
+const SPONSOR_TITLE_50 = 'Friendship Sponsor';
+const SPONSOR_DESCRIPTION_50 = 'Sponsor material for friendship bracelets!';
+const SPONSOR_TITLE_20 = 'Shine On Sponsor';
+const SPONSOR_DESCRIPTION_20 = 'Support Camp Kesem to shine on for 20 more years!';
 
 function PaddleSessionPage({ firebase, location }) {
   // use router history to access passes state
