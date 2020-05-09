@@ -38,8 +38,37 @@
     box-shadow: 0px 3px 8px #EDEBEB;
     line-height: 400%;
     padding-left: 5%;
+    padding-right: 3%;
     font-size: 11px;
     color: gray; 
+    display: flex; 
+    justify-content: space-between;
+    align-self: center; 
+}
+
+.text-first-part {
+    align-self: center;
+    line-height: 150%;
+    max-width: 80%;
+}
+
+.heart-icon-container {
+    width: 30px; 
+    display:flex; 
+    align-self: center;
+}
+
+.heart-icon-counter {
+    color: #06B085; 
+    font-family: Gilroy-Bold;
+    font-size: 12px; 
+    margin-right: 3px; 
+}
+
+.heart-icon-img {
+    align-self: center;
+    width: 15px; 
+    height: 15px; 
 }
 
 @media screen and (max-width: 450px) { 

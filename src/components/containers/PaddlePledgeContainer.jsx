@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
+import Confetti from 'react-confetti'; 
 
 import PropTypes from 'prop-types';
 import './styles/PaddlePledgeContainerStyles.css';
 
 import RoundedButton from '../input/RoundedButton';
 
-function PaddlePledgeContainer({ firebase, user, currentPledgeAmount, sessionId }) {
+function PaddlePledgeContainer({ firebase, user, currentPledgeAmount, numberOfPaddlesInSession, sessionId }) {
 
   const firebaseAddPaddle = () => {
     firebase.addPaddle(user.name, user.screenName, user.email, currentPledgeAmount, sessionId);
@@ -43,6 +44,7 @@ function PaddlePledgeContainer({ firebase, user, currentPledgeAmount, sessionId 
       customUI: ({ onClose }) => {
         return (
           <div className='confirmation-custom-ui'>
+            <Confetti> </Confetti>
             <button className = "confirmation-custom-ui-close-button"  onClick={onClose}>
               x
             </button>
@@ -66,7 +68,10 @@ function PaddlePledgeContainer({ firebase, user, currentPledgeAmount, sessionId 
 
   return ( 
     <div className='paddle-pledge-container'>
-      <div className='paddle-pledge-container-p'>Screen Name: <br></br> <b> {user.screenName} </b></div>
+      <div className='paddle-pledge-container-num-paddles'> 
+        <b> {numberOfPaddlesInSession} </b>people in the room
+      </div> 
+      <div className='paddle-pledge-container-p'>Your Screen Name: <br></br> <b> {user.screenName} </b></div>
       <div className='paddle-pledge-container-h2'>Pledge to give</div>
       <div className='paddle-pledge-container-h1'>${currentPledgeAmount}</div>
       <div className= "paddle-pledge-button-wrapper"> 
@@ -84,6 +89,7 @@ PaddlePledgeContainer.propTypes = {
   }).isRequired,
   sessionId: PropTypes.string.isRequired,
   currentPledgeAmount: PropTypes.number.isRequired,
+  numberOfPaddlesInSession: PropTypes.number.isRequired,
 };
 
 export default PaddlePledgeContainer;
