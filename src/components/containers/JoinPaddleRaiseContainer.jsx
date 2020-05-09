@@ -129,6 +129,7 @@ function JoinPaddleRaiseContainer({ firebase }) {
         value={paddleRaiseSessionId}
         placeholder={JOIN_SESSION_ID_PLACEHOLDER}
         onChangeText={(text) => setPaddleRaiseSessionId(text)}
+        toUpperCase={true}
       />
       {
         paddleRaiseSessionIdIsValid
