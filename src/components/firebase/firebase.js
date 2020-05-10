@@ -74,6 +74,13 @@ class Firebase {
     this.firestore.collection(`sessions/${sessionId}/paddles`).orderBy('createdAt')
   );
 
+  getPaddlesCollection = async (sessionId) => {
+    return this.firestore.collection(`sessions/${sessionId}/paddles`).get()
+    .then((paddlesCollection) => {
+      return paddlesCollection.docs.map((paddleDoc) => paddleDoc.data());
+    });
+  }
+
   subscribeToNumberOfPaddlesInSession = async (sessionId, onUpdate) => {
     return this.joineesCollection(sessionId).onSnapshot(querySnapshot => onUpdate(querySnapshot));
   }
