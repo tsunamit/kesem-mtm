@@ -27,5 +27,12 @@ export const logPaddlesInSession = async (firebase, sessionId) => {
     }
   });
 
-  console.log(emailToDonationAmountMap);
+  let output = '';
+  let totalDonationVerification = 0;
+  Object.entries(emailToDonationAmountMap).forEach(([key, paddleValue]) => {
+    output += `${paddleValue.email}, ${paddleValue.name}, ${paddleValue.donation}\n`;
+    totalDonationVerification += paddleValue.donation;
+  });
+  console.log(output);
+  console.log('total', totalDonationVerification);
 };
