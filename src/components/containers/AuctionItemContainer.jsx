@@ -22,7 +22,7 @@ function AuctionItemContainer({ title, description, itemOwner, link }) {
           <p className="card-p">{description}</p>
         </div>
         <p className="card-p">{courtesyOfString}</p>
-        <RoundedButton title={PLACE_BID} onClick={() => onClickLink()} />
+        {/* <RoundedButton title={PLACE_BID} onClick={() => onClickLink()} /> */}
       </div>
     </div>
   );
