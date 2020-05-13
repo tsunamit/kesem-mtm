@@ -12,7 +12,7 @@ import * as ROUTES from '../../constants/routes';
 
 // TODO: move these strings to separate file
 const JOIN_PADDLE_RAISE_TITLE = 'Join This Saturday!';
-const JOIN_DESCRIPTION = 'Join our Paddle Raise during our livestream on Saturday, May 9th, from 6-7pm PST on Facebook Live!';
+const JOIN_DESCRIPTION = 'Thank you for partcipating in our Paddle Raise! If you still wish to donate, please feel free to visit ';
 const JOIN_NAME_PLACEHOLDER = 'Full Name';
 const JOIN_EMAIL_PLACEHOLDER = 'Email Address';
 const JOIN_SCREEN_NAME_PLACEHOLDER = 'Screen Name (Optional)';
@@ -93,9 +93,12 @@ function JoinPaddleRaiseContainer({ firebase }) {
 
   return (
     <div id="card-container">
-      <div id="card-container-h1">{JOIN_PADDLE_RAISE_TITLE}</div>
-      <div id="card-container-p">{JOIN_DESCRIPTION}</div>
-      <OutlineTextBox
+      <div id="card-container-h1">Thank you for partcipating!</div>
+      <div id="card-container-p">
+        Thank you for partcipating in our Paddle Raise! If you still wish to donate, please feel free to visit this <a className="new-link" target="_blank" href="https://donate.kesem.org/uclamtm2020">website</a> to donate!
+        
+        </div>
+      {/* <OutlineTextBox
         value={paddleRaiseName}
         placeholder={JOIN_NAME_PLACEHOLDER}
         onChangeText={(text) => setPaddleRaiseName(text)}
@@ -139,7 +142,7 @@ function JoinPaddleRaiseContainer({ firebase }) {
           )
       }
       <div id="card-container-fine-text"> {SESSION_ID_DESCRIPTION}</div> 
-      <RoundedButton title={ENTER_PADDLE_RAISE_BTN_TEXT} onClick={async () => onClickJoin()} />
+      <RoundedButton title={ENTER_PADDLE_RAISE_BTN_TEXT} onClick={async () => onClickJoin()} /> */}
     </div>
   );
 }

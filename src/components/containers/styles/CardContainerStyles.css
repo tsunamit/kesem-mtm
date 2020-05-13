@@ -42,6 +42,14 @@
   letter-spacing: 0.03em;
 }
 
+.new-link {
+  text-decoration: none;
+}
+
+.new-link:visited {
+  text-decoration: none;
+}
+
 @media screen and (max-width: 450px) {
   #card-container {
     padding: 8%; 
