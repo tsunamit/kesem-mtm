@@ -9,7 +9,7 @@ import '../../styles/defaultStyles.css';
 import './styles/AuctionPageStyles.css';
 
 const TITLE = 'Online Auction';
-const AUCTION_DATES = 'Auction is open from May 6th - May 13th.';
+const AUCTION_DATES = 'Auction was open from May 6th, 3pm - May 13th, 3pm PST.';
 
 function AuctionPage({ firebase }) {
   const [auctionItems, setAuctionItems] = useState([]);
@@ -43,9 +43,7 @@ function AuctionPage({ firebase }) {
         <FadeIn delay="300" transitionDuration="2000">
           <div className="page-h1">{TITLE}</div>
           <p className="page-p">
-          To further support our campers, we are hosting an Online Auction. All items in this auction have been generously donated by friends of Camp Kesem, 
-          and all proceeds directly support our campers! To participate, please see our <b><a id = 'link-style' target= '_blank'  href="https://docs.google.com/document/d/1i00eK3NNZ2v7ytOY2aVHd-RADmIeY2qCev9emOvXf8c/edit">auction rules and agreement</a></b>.
-
+            Our online auction is now closed. Thank you for your participation!
           </p>
           <p className="page-p bold">{AUCTION_DATES}</p>
           <br />
